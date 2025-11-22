@@ -1,0 +1,2218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>repnexa Dashboards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Top header -->
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <button
+            class="icon-button"
+            id="sidebarToggle"
+            aria-label="Toggle sidebar"
+          >
+            ☰
+          </button>
+          <div class="logo"></div>
+          <div class="page-title">Repnexa Dashboards</div>
+        </div>
+        <div class="top-bar-right">
+          <button class="btn btn-secondary">
+            <span>Export</span>
+          </button>
+          <div class="avatar"></div>
+        </div>
+      </header>
+
+      <!-- Main layout -->
+      <div class="layout" id="layout">
+        <!-- Side navigation -->
+        <nav class="side-nav">
+          <div class="side-nav-title">Dashboards</div>
+
+          <button class="side-nav-item is-active" data-view="doctor-coverage">
+            <span class="side-nav-dot"></span>
+            <span class="side-nav-label">Company Overview</span>
+          </button>
+
+            <!-- 🆕 Detail views section -->
+            <div class="side-nav-title">Detail Views</div>
+
+            <button class="side-nav-item" data-view="doctor-detail">
+              <span class="side-nav-dot"></span>
+              <span class="side-nav-label">Doctor Detail</span>
+            </button>
+
+            <button class="side-nav-item" data-view="rep-detail">
+              <span class="side-nav-dot"></span>
+              <span class="side-nav-label">Rep Detail</span>
+            </button>
+
+            <button class="side-nav-item" data-view="product-detail">
+              <span class="side-nav-dot"></span>
+              <span class="side-nav-label">Product Detail</span>
+            </button>
+
+            <button class="side-nav-item" data-view="chemist-detail">
+              <span class="side-nav-dot"></span>
+              <span class="side-nav-label">Chemist Detail</span>
+            </button>
+            <!-- 🆕 end Detail Views -->
+
+          <div class="side-nav-title">Admin</div>
+
+          <button class="side-nav-item" data-view="admin-doctors">
+            <span class="side-nav-dot"></span>
+            <span class="side-nav-label">Admin – Doctors</span>
+          </button>
+
+          <button class="side-nav-item" data-view="admin-chemists">
+            <span class="side-nav-dot"></span>
+            <span class="side-nav-label">Admin – Chemists</span>
+          </button>
+
+          <button class="side-nav-item" data-view="admin-products">
+            <span class="side-nav-dot"></span>
+            <span class="side-nav-label">Admin – Products</span>
+          </button>
+        </nav>
+
+        <!-- Main content -->
+        <main class="dashboard-main">
+          <!-- ===================== -->
+          <!-- 1) Doctor Coverage    -->
+          <!-- ===================== -->
+          <section class="dashboard-view is-active" data-view="doctor-coverage">
+            <!-- Filter bar -->
+            <section class="filter-bar">
+              <div class="filter-group">
+                <div class="filter-label">Time period</div>
+                <div class="filter-input">
+                  <span>This month</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <div class="filter-label">Territory / Station</div>
+                <div class="filter-input">
+                  <span>All territories</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <div class="filter-label">Field Manager</div>
+                <div class="filter-input">
+                  <span>All managers</span>
+                  <span class="filter-chevron"></span>
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <div class="filter-label">Grade</div>
+                <div class="filter-input">
+                 <label for="grades">Select Grade</label>
+                 <span class="filter-chevron">▾</span>
+
+                 
+                </div>
+              </div>
+            </section>
+
+            <!-- KPI row -->
+            <section class="kpi-row">
+              <article class="kpi-card">
+                <div class="kpi-label">All-grades Coverage</div>
+                <div class="kpi-value">82%</div>
+                <div class="kpi-delta delta-success">
+                  <span class="delta-icon">▲</span>
+                  <span>+4% vs last month</span>
+                </div>
+              </article>
+
+              <article class="kpi-card">
+                <div class="kpi-label">
+                  All-grades Doctors at Risk (14+ days no visit)
+                </div>
+                <div class="kpi-value">2</div>
+                <div class="kpi-delta delta-warning">
+                  <span class="delta-icon">●</span>
+                  <span>Need follow-up</span>
+                </div>
+              </article>
+
+              <article class="kpi-card">
+                <div class="kpi-label">Total Doctor Visits </div>
+                <div class="kpi-value">1,234</div>
+                <div class="kpi-delta delta-success">
+                  <span class="delta-icon">▲</span>
+                  <span>+8% vs last month</span>
+                </div>
+              </article>
+
+              <article class="kpi-card">
+                <div class="kpi-label">Avg Visits/Doctor (All-grades)</div>
+                <div class="kpi-value">3.6</div>
+                <div class="kpi-delta delta-warning">
+                  <span class="delta-icon">●</span>
+                  <span>Target: 4 visits / month</span>
+                </div>
+              </article>
+            </section>
+                        <!-- Company overview content -->
+
+            <!-- Block 1: Doctor & Rep performance -->
+            <section class="content-grid">
+              <!-- Coverage % by Grade -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Coverage % by Grade</div>
+                    <div class="card-subtitle">
+                       (visits completed  ÷  total visits of doctors ) x 100%
+                    </div>
+                  </div>
+                  <div class="card-header-right chip">
+                    <span>Target line</span>
+                  </div>
+                </div>
+
+                <div class="chart-bars">
+                  <div class="chart-bar-group">
+                    <div class="chart-bar" style="height: 140px">82%</div>
+                    <div class="chart-bar-label">A</div>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div
+                      class="chart-bar chart-bar--muted"
+                      style="height: 110px"
+                    >
+                      67%
+                    </div>
+                    <div class="chart-bar-label">B</div>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div
+                      class="chart-bar chart-bar--muted"
+                      style="height: 80px"
+                    >
+                      54%
+                    </div>
+                    <div class="chart-bar-label">C</div>
+                  </div>
+                </div>
+                <div class="target-line"></div>
+                <div class="chart-caption">
+                  Target coverage: A ≥ 85%, B ≥ 70%, C ≥ 55% (example
+                  thresholds)
+                </div>
+              </article>
+
+              <!-- All-grades Target Achievement by Rep -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">
+                      All-grades Target Achievement by Rep
+                    </div>
+                    <div class="card-subtitle">
+                      % of All-grades visit target achieved in selected period
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-bars chart-bars-horizontal">
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--good"
+                      style="width: 118%"
+                    >
+                      Rep 01 – 118%
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--good"
+                      style="width: 104%"
+                    >
+                      Rep 02 – 104%
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--ok"
+                      style="width: 92%"
+                    >
+                      Rep 03 – 92%
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--warn"
+                      style="width: 74%"
+                    >
+                      Rep 04 – 74%
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="card-header-right chip">
+                    <a href="https://google.com">see more...</a>
+                  </div>
+              </article>
+
+              <!-- Rep Performance – Detail -->
+              <article class="table-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Rep Performance – Detail</div>
+                    <div class="card-subtitle">
+                      Per-rep totals, unique doctors and A-grade achievement
+                    </div>
+                  </div>
+                  
+                </div>
+                <div class="table-wrapper">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Rep</th>
+                        <th>Territory</th>
+                        <th>Total Visits</th>
+                        <th>Unique Doctors</th>
+                        
+                        <th>A-grade Visits</th>
+                        <th>B-grade Visits</th>
+                        <th>C-grade Visits</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Rep 01</td>
+                        <td>Colombo North</td>
+                        <td>380</td>
+                        <td>180</td>
+                        <td>140</td>
+                        <td>130</td>
+                        <td>110</td>
+                      
+                      </tr>
+                      <tr>
+                        <td>Rep 02</td>
+                        <td>Kandy</td>
+                        <td>150</td>
+                        <td>80</td>
+                        <td>56</td>
+                        <td>60</td>
+                        <td>34</td>
+                      
+                      </tr>
+                      <tr>
+                        <td>Rep 03</td>
+                        <td>Galle</td>
+                        <td>120</td>
+                        <td>70</td>
+                        <td>40</td>
+                        <td>60</td>
+                        <td>20</td>
+                      
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="card-header-right chip">
+                    <a href="https://google.com">see more...</a>
+                  </div>
+              </article>
+            </section>
+
+            <!-- Block 2: Product promotion -->
+            <section class="content-grid">
+              <!-- Product Coverage by Grade -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Product Coverage by Grade</div>
+                    <div class="card-subtitle">
+                      Rows: Products, Columns: Grades (A/B/C), Values: unique
+                      doctors
+                    </div>
+                  </div>
+                </div>
+                <div class="heatmap">
+                  <div class="heatmap-row">
+                    <div class="heatmap-label">Grade</div>
+                    <div class="heatmap-cell heatmap-cell--high">All</div>
+                    <div class="heatmap-cell heatmap-cell--high">A</div>
+                    <div class="heatmap-cell heatmap-cell--high">B</div>
+                    <div class="heatmap-cell heatmap-cell--high">C</div>
+                  </div>
+                  <div class="heatmap-row">
+                    <div class="heatmap-label">Prod A</div>
+                    <div class="heatmap-cell heatmap-cell--low">484</div>
+                    <div class="heatmap-cell heatmap-cell--low">178</div>
+                    <div class="heatmap-cell heatmap-cell--low">210</div>
+                    <div class="heatmap-cell heatmap-cell--low">96</div>
+                  </div>
+                  <div class="heatmap-row">
+                    <div class="heatmap-label">Prod B</div>
+                    <div class="heatmap-cell heatmap-cell--low">425</div>
+                    <div class="heatmap-cell heatmap-cell--low">142</div>
+                    <div class="heatmap-cell heatmap-cell--low">198</div>
+                    <div class="heatmap-cell heatmap-cell--low">85</div>
+                  </div>
+                       <div class="heatmap-row">
+                    <div class="heatmap-label">Prod C</div>
+                    <div class="heatmap-cell heatmap-cell--low">233</div>
+                    <div class="heatmap-cell heatmap-cell--low">134</div>
+                    <div class="heatmap-cell heatmap-cell--low">18</div>
+                    <div class="heatmap-cell heatmap-cell--low">81</div>
+                  </div>
+                       <div class="heatmap-row">
+                    <div class="heatmap-label">Prod D</div>
+                    <div class="heatmap-cell heatmap-cell--low">406</div>
+                    <div class="heatmap-cell heatmap-cell--low">112</div>
+                    <div class="heatmap-cell heatmap-cell--low">109</div>
+                    <div class="heatmap-cell heatmap-cell--low">185</div>
+                  </div>
+                       <div class="heatmap-row">
+                    <div class="heatmap-label">Prod E</div>
+                    <div class="heatmap-cell heatmap-cell--low">165</div>
+                    <div class="heatmap-cell heatmap-cell--low">42</div>
+                    <div class="heatmap-cell heatmap-cell--low">98</div>
+                    <div class="heatmap-cell heatmap-cell--low">25</div>
+                  </div>
+                  <div class="heatmap-row">
+                    <div class="heatmap-label">Prod F</div>
+                    <div class="heatmap-cell heatmap-cell--low">206</div>
+                    <div class="heatmap-cell heatmap-cell--low">72</div>
+                    <div class="heatmap-cell heatmap-cell--low">94</div>
+                    <div class="heatmap-cell heatmap-cell--low">40</div>
+                  </div>
+                </div>
+                <div class="card-header-right chip">
+                    <a href="https://google.com">see more...</a>
+                </div>
+              </article>
+
+  
+
+        
+            <!-- Block 3: Stock-out risk -->
+            <section class="content-grid">
+              <!-- OOS Events by Product -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">OOS Events by Product</div>
+                    <div class="card-subtitle">
+                      Bar height shows # of "Out of Stock" reports
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-bars">
+                  <div class="chart-bar-group">
+                    <div
+                      class="chart-bar chart-bar--muted"
+                      style="height: 140px"
+                    >
+                      28
+                    </div>
+                    <div class="chart-bar-label">Prod C</div>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div
+                      class="chart-bar chart-bar--muted"
+                      style="height: 110px"
+                    >
+                      22
+                    </div>
+                    <div class="chart-bar-label">Prod A</div>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div
+                      class="chart-bar chart-bar--muted"
+                      style="height: 80px"
+                    >
+                      16
+                    </div>
+                    <div class="chart-bar-label">Prod B</div>
+                  </div>
+                </div>
+                <div class="chart-caption">
+                  Use to decide which products need distribution attention
+                  first.
+                </div>
+              </article>
+
+              <!-- OOS Events by Territory -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">OOS Events by Territory</div>
+                    <div class="card-subtitle">
+                      Concentration of stock issues by geography
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-bars chart-bars-horizontal">
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--bad"
+                      style="width: 90%"
+                    >
+                      Colombo North – 24
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--warn"
+                      style="width: 75%"
+                    >
+                      Kandy – 18
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--ok"
+                      style="width: 55%"
+                    >
+                      Galle – 12
+                    </div>
+                    
+                  </div>
+                       <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--ok"
+                      style="width: 45%"
+                    >
+                      Jaffna – 9
+                    </div>
+                    
+                  </div>
+                  
+                </div>
+                <div class="card-header-right chip">
+                    <a href="https://google.com">see more...</a>
+                  </div>
+              </article>
+            </section>
+
+          </section>
+
+          <!-- ===================== -->
+          <!-- 3) Rep Performance    -->
+          <!-- ===================== -->
+          <section class="dashboard-view" data-view="rep-performance">
+            <section class="filter-bar">
+              <div class="filter-group">
+                <div class="filter-label">Time period</div>
+                <div class="filter-input">
+                  <span>This month</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Territory / Station</div>
+                <div class="filter-input">
+                  <span>All territories</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Field Manager</div>
+                <div class="filter-input">
+                  <span>All managers</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Rep</div>
+                <div class="filter-input">
+                  <span>All reps</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Grade focus</div>
+                <div class="filter-input">
+                  <span>A-grade only</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="kpi-row">
+              <article class="kpi-card">
+                <div class="kpi-label">Avg A-grade Target Achievement</div>
+                <div class="kpi-value">92%</div>
+                <div class="kpi-delta delta-success">
+                  <span class="delta-icon">▲</span>
+                  <span>+5% vs last month</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Reps On or Above Target</div>
+                <div class="kpi-value">9</div>
+                <div class="kpi-delta delta-success">
+                  <span class="delta-icon">▲</span>
+                  <span>+2 vs last month</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Reps Below 80% Target</div>
+                <div class="kpi-value">4</div>
+                <div class="kpi-delta delta-warning">
+                  <span class="delta-icon">●</span>
+                  <span>Needs coaching</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Total Visits (Team)</div>
+                <div class="kpi-value">1,234</div>
+                <div class="kpi-delta delta-success">
+                  <span class="delta-icon">▲</span>
+                  <span>+8% vs last month</span>
+                </div>
+              </article>
+            </section>
+
+            <section class="content-grid">
+              <!-- Leaderboard chart -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">
+                      A-grade Target Achievement by Rep
+                    </div>
+                    <div class="card-subtitle">
+                      % of A-grade visit target achieved in selected period
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-bars chart-bars-horizontal">
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--good"
+                      style="width: 118%"
+                    >
+                      Rep 01 – 118%
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--good"
+                      style="width: 104%"
+                    >
+                      Rep 02 – 104%
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--ok"
+                      style="width: 92%"
+                    >
+                      Rep 03 – 92%
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--warn"
+                      style="width: 74%"
+                    >
+                      Rep 04 – 74%
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Table -->
+              <article class="table-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Rep Performance – Detail</div>
+                    <div class="card-subtitle">
+                      Per-rep totals, unique doctors and A-grade achievement
+                    </div>
+                  </div>
+                </div>
+                <div class="table-wrapper">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Rep</th>
+                        <th>Territory</th>
+                        <th>Total Visits</th>
+                        <th>Unique Doctors</th>
+                        <th>A-grade Visits</th>
+                        <th>A-grade Target</th>
+                        <th>Achievement %</th>
+                        <th>Sprint Compliance</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Rep 01</td>
+                        <td>Colombo North</td>
+                        <td>180</td>
+                        <td>96</td>
+                        <td>72</td>
+                        <td>60</td>
+                        <td>120%</td>
+                        <td>98%</td>
+                      </tr>
+                      <tr>
+                        <td>Rep 02</td>
+                        <td>Kandy</td>
+                        <td>150</td>
+                        <td>80</td>
+                        <td>56</td>
+                        <td>60</td>
+                        <td>93%</td>
+                        <td>92%</td>
+                      </tr>
+                      <tr>
+                        <td>Rep 03</td>
+                        <td>Galle</td>
+                        <td>120</td>
+                        <td>70</td>
+                        <td>40</td>
+                        <td>60</td>
+                        <td>67%</td>
+                        <td>78%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+            </section>
+          </section>
+
+          <!-- ===================== -->
+          <!-- 4) Product Coverage   -->
+          <!-- ===================== -->
+          <section class="dashboard-view" data-view="product-coverage">
+            <section class="filter-bar">
+              <div class="filter-group">
+                <div class="filter-label">Time period</div>
+                <div class="filter-input">
+                  <span>Last quarter</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Territory</div>
+                <div class="filter-input">
+                  <span>All territories</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Field Manager</div>
+                <div class="filter-input">
+                  <span>All managers</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Rep</div>
+                <div class="filter-input">
+                  <span>All reps</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Grade focus</div>
+                <div class="filter-input">
+                  <span>All grades</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Doctor speciality</div>
+                <div class="filter-input">
+                  <span>All specialities</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <!-- Product filter -->
+              <div class="filter-group">
+                <div class="filter-label">Product</div>
+                <div class="filter-input">
+                  <span>All products</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="kpi-row">
+              <article class="kpi-card">
+                <div class="kpi-label">Avg A-grade Doctors per Product</div>
+                <div class="kpi-value">135</div>
+                <div class="kpi-delta delta-success">
+                  <span class="delta-icon">▲</span>
+                  <span>+6% vs last quarter</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Best A-grade Coverage Product</div>
+                <div class="kpi-value">Prod A</div>
+                <div class="kpi-delta delta-success">
+                  <span class="delta-icon">▲</span>
+                  <span>178 A-grade doctors</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Lowest A-grade Coverage</div>
+                <div class="kpi-value">Prod F</div>
+                <div class="kpi-delta delta-warning">
+                  <span class="delta-icon">●</span>
+                  <span>72 A-grade doctors</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Total Detailing Calls</div>
+                <div class="kpi-value">4,560</div>
+                <div class="kpi-delta delta-success">
+                  <span class="delta-icon">▲</span>
+                  <span>+9% vs last quarter</span>
+                </div>
+              </article>
+            </section>
+
+            <section class="content-grid">
+              <!-- Heatmap -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Product Coverage by Grade</div>
+                    <div class="card-subtitle">
+                      Rows: Products, Columns: Grades (A/B/C), Values: unique
+                      doctors
+                    </div>
+                  </div>
+                </div>
+                <div class="heatmap">
+                  <div class="heatmap-row">
+                    <div class="heatmap-label">Prod A</div>
+                    <div class="heatmap-cell heatmap-cell--high">178</div>
+                    <div class="heatmap-cell heatmap-cell--medium">210</div>
+                    <div class="heatmap-cell heatmap-cell--low">96</div>
+                  </div>
+                  <div class="heatmap-row">
+                    <div class="heatmap-label">Prod B</div>
+                    <div class="heatmap-cell heatmap-cell--medium">142</div>
+                    <div class="heatmap-cell heatmap-cell--medium">198</div>
+                    <div class="heatmap-cell heatmap-cell--low">85</div>
+                  </div>
+                  <div class="heatmap-row">
+                    <div class="heatmap-label">Prod F</div>
+                    <div class="heatmap-cell heatmap-cell--low">72</div>
+                    <div class="heatmap-cell heatmap-cell--low">94</div>
+                    <div class="heatmap-cell heatmap-cell--low">40</div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- A-grade bar -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">A-grade Coverage by Product</div>
+                    <div class="card-subtitle">
+                      Unique A-grade doctors detailed in selected period
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-bars chart-bars-horizontal">
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--good"
+                      style="width: 100%"
+                    >
+                      Prod A – 178
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--ok"
+                      style="width: 80%"
+                    >
+                      Prod B – 142
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--warn"
+                      style="width: 45%"
+                    >
+                      Prod F – 72
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Table -->
+              <article class="table-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Product Coverage – Detail</div>
+                    <div class="card-subtitle">
+                      Per-product unique doctors by grade and total detailing
+                      calls
+                    </div>
+                  </div>
+                </div>
+                <div class="table-wrapper">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Product</th>
+                        <th>A-grade Doctors</th>
+                        <th>B-grade Doctors</th>
+                        <th>C-grade Doctors</th>
+                        <th>Total Detailing Calls</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Prod A</td>
+                        <td>178</td>
+                        <td>210</td>
+                        <td>96</td>
+                        <td>932</td>
+                      </tr>
+                      <tr>
+                        <td>Prod B</td>
+                        <td>142</td>
+                        <td>198</td>
+                        <td>85</td>
+                        <td>754</td>
+                      </tr>
+                      <tr>
+                        <td>Prod F</td>
+                        <td>72</td>
+                        <td>94</td>
+                        <td>40</td>
+                        <td>310</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+            </section>
+          </section>
+
+          <!-- ===================== -->
+          <!-- 6) Chemist Stock-Outs -->
+          <!-- ===================== -->
+          <section class="dashboard-view" data-view="chemist-stockouts">
+            <section class="filter-bar">
+              <div class="filter-group">
+                <div class="filter-label">Time period</div>
+                <div class="filter-input">
+                  <span>Last month</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Territory</div>
+                <div class="filter-input">
+                  <span>All territories</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Field Manager</div>
+                <div class="filter-input">
+                  <span>All managers</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Rep</div>
+                <div class="filter-input">
+                  <span>All reps</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Product</div>
+                <div class="filter-input">
+                  <span>All products</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <!-- Chemist filter -->
+              <div class="filter-group">
+                <div class="filter-label">Chemist</div>
+                <div class="filter-input">
+                  <span>All chemists</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="kpi-row">
+              <article class="kpi-card">
+                <div class="kpi-label">Total OOS Events</div>
+                <div class="kpi-value">96</div>
+                <div class="kpi-delta delta-warning">
+                  <span class="delta-icon">●</span>
+                  <span>High</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Chronic OOS Chemists</div>
+                <div class="kpi-value">14</div>
+                <div class="kpi-delta delta-error">
+                  <span class="delta-icon">▼</span>
+                  <span>Need urgent follow-up</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Worst Product by OOS</div>
+                <div class="kpi-value">Prod C</div>
+                <div class="kpi-delta delta-error">
+                  <span class="delta-icon">▼</span>
+                  <span>28 OOS events</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Worst Territory by OOS</div>
+                <div class="kpi-value">Colombo North</div>
+                <div class="kpi-delta delta-warning">
+                  <span class="delta-icon">●</span>
+                  <span>24 events</span>
+                </div>
+              </article>
+            </section>
+
+            <section class="content-grid">
+              <!-- OOS by product -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">OOS Events by Product</div>
+                    <div class="card-subtitle">
+                      Bar height shows # of "Out of Stock" reports
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-bars">
+                  <div class="chart-bar-group">
+                    <div
+                      class="chart-bar chart-bar--muted"
+                      style="height: 140px"
+                    >
+                      28
+                    </div>
+                    <div class="chart-bar-label">Prod C</div>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div
+                      class="chart-bar chart-bar--muted"
+                      style="height: 110px"
+                    >
+                      22
+                    </div>
+                    <div class="chart-bar-label">Prod A</div>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div
+                      class="chart-bar chart-bar--muted"
+                      style="height: 80px"
+                    >
+                      16
+                    </div>
+                    <div class="chart-bar-label">Prod B</div>
+                  </div>
+                </div>
+                <div class="chart-caption">
+                  Use to decide which products need distribution attention
+                  first.
+                </div>
+              </article>
+
+              <!-- OOS by territory -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">OOS Events by Territory</div>
+                    <div class="card-subtitle">
+                      Concentration of stock issues by geography
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-bars chart-bars-horizontal">
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--bad"
+                      style="width: 90%"
+                    >
+                      Colombo North – 24
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--warn"
+                      style="width: 75%"
+                    >
+                      Kandy – 18
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--ok"
+                      style="width: 55%"
+                    >
+                      Galle – 12
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Chronic OOS table -->
+              <article class="table-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Chronic OOS Chemists</div>
+                    <div class="card-subtitle">
+                      Chemists with repeated "Out of Stock" for the same product
+                    </div>
+                  </div>
+                </div>
+                <div class="table-wrapper">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Chemist</th>
+                        <th>Territory</th>
+                        <th>Product</th>
+                        <th># OOS Events</th>
+                        <th>Last OOS Date</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="row-risk">
+                        <td>HealthPlus Pharmacy</td>
+                        <td>Colombo North</td>
+                        <td>Prod C</td>
+                        <td>5</td>
+                        <td>2025-11-10</td>
+                        <td>
+                          <span class="status-tag status-tag--risk"
+                            >Chronic OOS</span
+                          >
+                        </td>
+                      </tr>
+                      <tr class="row-risk">
+                        <td>CityCare Chemist</td>
+                        <td>Kandy</td>
+                        <td>Prod A</td>
+                        <td>4</td>
+                        <td>2025-11-06</td>
+                        <td>
+                          <span class="status-tag status-tag--risk"
+                            >Chronic OOS</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Sunrise Pharmacy</td>
+                        <td>Galle</td>
+                        <td>Prod B</td>
+                        <td>3</td>
+                        <td>2025-11-03</td>
+                        <td>
+                          <span class="status-tag status-tag--ok"
+                            >Improving</span
+                          >
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+            </section>
+          </section>
+
+          <!-- ===================== -->
+          <!-- 8) Rep Fuel Expenses  -->
+          <!-- ===================== -->
+          <section class="dashboard-view" data-view="rep-expenses">
+            <section class="filter-bar">
+              <div class="filter-group">
+                <div class="filter-label">Time period</div>
+                <div class="filter-input">
+                  <span>This month</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Territory</div>
+                <div class="filter-input">
+                  <span>All territories</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Field Manager</div>
+                <div class="filter-input">
+                  <span>All managers</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Rep</div>
+                <div class="filter-input">
+                  <span>All reps</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="kpi-row">
+              <article class="kpi-card">
+                <div class="kpi-label">Total Mileage</div>
+                <div class="kpi-value">4,320 km</div>
+                <div class="kpi-delta delta-success">
+                  <span class="delta-icon">▲</span>
+                  <span>+5% vs last month</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Avg Mileage per Rep</div>
+                <div class="kpi-value">332 km</div>
+                <div class="kpi-delta delta-warning">
+                  <span class="delta-icon">●</span>
+                  <span>Slightly above plan</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Highest Mileage Rep</div>
+                <div class="kpi-value">Rep 02</div>
+                <div class="kpi-delta delta-warning">
+                  <span class="delta-icon">●</span>
+                  <span>520 km</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Total Additional Expenses</div>
+                <div class="kpi-value">LKR 245,000</div>
+                <div class="kpi-delta delta-success">
+                  <span class="delta-icon">▲</span>
+                  <span>Within budget</span>
+                </div>
+              </article>
+            </section>
+
+            <section class="content-grid">
+              <!-- Line chart: mileage over time per rep -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">
+                      Mileage Over Time (Selected Rep)
+                    </div>
+                    <div class="card-subtitle">
+                      Weekly total mileage logged from DCR
+                    </div>
+                  </div>
+                  <div class="card-header-right">
+                    <span>Rep:</span>
+                    <select id="rep-line-select" class="select-inline">
+                      <option>Rep 01</option>
+                      <option>Rep 02</option>
+                      <option>Rep 03</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="line-chart">
+                  <svg viewBox="0 0 300 160" preserveAspectRatio="none">
+                    <!-- Axes -->
+                    <line
+                      class="line-chart-axis"
+                      x1="20"
+                      y1="10"
+                      x2="20"
+                      y2="140"
+                    />
+                    <line
+                      class="line-chart-axis"
+                      x1="20"
+                      y1="140"
+                      x2="290"
+                      y2="140"
+                    />
+
+                    <!-- Mileage line (placeholder points) -->
+                    <polyline
+                      class="line-chart-line-mileage"
+                      points="20,120 80,90 140,110 200,70 260,80"
+                    ></polyline>
+                  </svg>
+                  <div class="line-chart-legend">
+                    <span class="legend-item">
+                      <span class="legend-dot legend-dot--mileage"></span>
+                      Mileage (km)
+                    </span>
+                  </div>
+                </div>
+                <div class="chart-caption" id="rep-line-caption">
+                  Selected rep: Rep 01
+                </div>
+              </article>
+
+              <!-- Bar chart: mileage vs visits by rep -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Mileage vs Visits (By Rep)</div>
+                    <div class="card-subtitle">
+                      Quick check of routing efficiency by rep
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-bars chart-bars-horizontal">
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--ok"
+                      style="width: 70%"
+                    >
+                      Rep 01 – 420 km / 120 visits
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--warn"
+                      style="width: 90%"
+                    >
+                      Rep 02 – 520 km / 130 visits
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--ok"
+                      style="width: 65%"
+                    >
+                      Rep 03 – 390 km / 110 visits
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Table: rep expenses -->
+              <article class="table-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">
+                      Rep Mileage &amp; Additional Expenses
+                    </div>
+                    <div class="card-subtitle">
+                      Filter by rep to see detailed fuel-related activity
+                    </div>
+                  </div>
+                  <div class="card-header-right">
+                    <span>Rep:</span>
+                    <select id="rep-expense-filter" class="select-inline">
+                      <option value="all">All reps</option>
+                      <option value="Rep 01">Rep 01</option>
+                      <option value="Rep 02">Rep 02</option>
+                      <option value="Rep 03">Rep 03</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="table-wrapper">
+                  <table id="table-rep-expenses">
+                    <thead>
+                      <tr>
+                        <th>Rep</th>
+                        <th>Territory</th>
+                        <th>Total Mileage (km)</th>
+                        <th>Doctor Visits</th>
+                        <th>Chemist Visits</th>
+                        <th>Additional Expenses (LKR)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr data-rep="Rep 01">
+                        <td>Rep 01</td>
+                        <td>Colombo North</td>
+                        <td>420</td>
+                        <td>120</td>
+                        <td>30</td>
+                        <td>32,000</td>
+                      </tr>
+                      <tr data-rep="Rep 02">
+                        <td>Rep 02</td>
+                        <td>Kandy</td>
+                        <td>520</td>
+                        <td>130</td>
+                        <td>28</td>
+                        <td>41,000</td>
+                      </tr>
+                      <tr data-rep="Rep 03">
+                        <td>Rep 03</td>
+                        <td>Galle</td>
+                        <td>390</td>
+                        <td>110</td>
+                        <td>25</td>
+                        <td>29,000</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+            </section>
+          </section>
+
+                    </section>
+
+          
+          <!-- ===================== -->
+          <!-- 15) Admin – Doctors   -->
+          <!-- ===================== -->
+          <section class="dashboard-view" data-view="admin-doctors">
+            <section class="filter-bar admin-filter-bar">
+              <div class="filter-group filter-group--search">
+                <div class="filter-label">Search doctor master</div>
+                <div class="filter-input filter-input--search">
+                  <input
+                    type="text"
+                    id="admin-doctor-search"
+                    placeholder="Name…"
+                  />
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <div class="filter-label">Status</div>
+                <div class="filter-input">
+                  <span>Active only</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+               <div class="filter-group">
+                <div class="filter-label">Location</div>
+                <div class="filter-input">
+                  <span>select a location</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+                <div class="filter-group">
+                <div class="filter-label">Speciality</div>
+                <div class="filter-input">
+                  <span>select a speciality</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+
+
+
+              <div class="filter-group">
+                <div class="filter-label">Grade</div>
+                <div class="filter-input">
+                  <span>select a grade</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+          
+
+              <div class="filter-group admin-filter-actions">
+                <button
+                  class="btn btn-primary"
+                  id="btn-open-doctor-form"
+                  type="button"
+                >
+                  + Add doctor
+                </button>
+              </div>
+            </section>
+
+            <section class="content-grid admin-grid">
+              <!-- Form panel -->
+              <article class="chart-card admin-form-card" id="doctor-form-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title" id="doctor-form-title">
+                      Add doctor
+                    </div>
+                    <div class="card-subtitle">
+                      Maintain doctor master: grade, locations, status &amp;
+                      remarks.
+                    </div>
+                  </div>
+                  <div class="card-header-right">
+                    <button
+                      class="icon-button admin-form-close btn-cancel"
+                      type="button"
+                      aria-label="Close form"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+
+                <form class="form" id="doctor-form">
+                  <div class="form-grid-2">
+                    <div class="form-field">
+                      <label class="form-label" for="doctor-name-input"
+                        >Doctor name</label
+                      >
+                      <input
+                        id="doctor-name-input"
+                        class="input-text"
+                        type="text"
+                        placeholder="Dr. Name"
+                        required
+                      />
+                    </div>
+
+                    <div class="form-field">
+                      <label class="form-label" for="doctor-grade-input"
+                        >Grade</label
+                      >
+                      <select id="doctor-grade-input" class="input-select">
+                        <option value="A">A – High potential</option>
+                        <option value="B">B – Medium</option>
+                        <option value="C">C – Low</option>
+                      </select>
+                    </div>
+
+                    <div class="form-field">
+                      <label class="form-label" for="doctor-status-input"
+                        >Status</label
+                      >
+                      <select id="doctor-status-input" class="input-select">
+                        <option value="Active">Active</option>
+                        <option value="Retired">
+                          Retired (hidden from dashboards)
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="form-field">
+                      <label class="form-label" for="doctor-primary-rep-input"
+                        >Primary rep</label
+                      >
+                      <select
+                        id="doctor-primary-rep-input"
+                        class="input-select"
+                      >
+                        <option>Rep 01 – H. Jayasuriya</option>
+                        <option>Rep 02 – M. Perera</option>
+                        <option>Rep 03 – S. Perera</option>
+                        <option>Rep 05 – I. Silva</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-grid-2">
+                    <div class="form-field">
+                      <label class="form-label" for="doctor-territory-input"
+                        >Primary territory</label
+                      >
+                      <select id="doctor-territory-input" class="input-select">
+                        <option>Colombo North</option>
+                        <option>Colombo South</option>
+                        <option>Kandy</option>
+                        <option>Galle</option>
+                        <option>Negombo</option>
+                      </select>
+                    </div>
+
+                    <div class="form-field">
+                      <label class="form-label" for="doctor-secondary-rep-input"
+                        >Secondary rep (optional)</label
+                      >
+                      <select
+                        id="doctor-secondary-rep-input"
+                        class="input-select"
+                      >
+                        <option value="">None</option>
+                        <option>Rep 01 – H. Jayasuriya</option>
+                        <option>Rep 02 – M. Perera</option>
+                        <option>Rep 03 – S. Perera</option>
+                        <option>Rep 05 – I. Silva</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-field">
+                    <label class="form-label"
+                      >Additional locations (sample)</label
+                    >
+                    <div class="tag-list" id="doctor-locations-current">
+                      <span class="tag">Colombo North</span>
+                      <span class="tag">Kandy</span>
+                    </div>
+                    <p class="form-helper">
+                      In the real system this would be a multi-select / tagging
+                      component so a doctor can be attached to multiple
+                      locations.
+                    </p>
+                  </div>
+
+                  <div class="form-field">
+                    <label class="form-label" for="doctor-remark-input"
+                      >Remark / interaction notes</label
+                    >
+                    <textarea
+                      id="doctor-remark-input"
+                      class="input-textarea"
+                      placeholder="Short note about last interaction or special instructions…"
+                    ></textarea>
+                  </div>
+
+                  <div class="form-actions">
+                    <button class="btn btn-secondary btn-cancel" type="button">
+                      Cancel
+                    </button>
+                    <button class="btn btn-primary" type="submit">
+                      Save doctor
+                    </button>
+                  </div>
+                </form>
+              </article>
+
+              <!-- Doctor master table -->
+              <article class="table-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Master – Doctors</div>
+                    <div class="card-subtitle">
+                      One row per doctor. Retired doctors will be hidden from
+                      operational dashboards.
+                    </div>
+                  </div>
+                  <div class="card-header-right">
+                    <span class="muted">Sample data</span>
+                  </div>
+                </div>
+
+                <div class="table-wrapper">
+                  <table id="admin-table-doctors">
+                    <thead>
+                      <tr>
+                        <th>Doctor</th>
+                        <th>Grade</th>
+                        <th>Locations</th>
+                        <th>Status</th>
+                        <th>Primary Rep</th>
+                        <th>Secondary Rep</th>
+                        <th>Last Updated</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Dr. A Kumar</td>
+                        <td><span class="grade-badge">A</span></td>
+                        <td>
+                          <span class="tag">Colombo North</span>
+                          <span class="tag">Kandy</span>
+                        </td>
+                        <td>
+                          <span class="status-tag status-tag--ok">Active</span>
+                        </td>
+                        <td>Rep 03 – S. Perera</td>
+                        <td>Rep 01 – H. Jayasuriya</td>
+                        <td>2025-11-08</td>
+                        <td>
+                          <button
+                            class="link-button admin-doctor-edit"
+                            type="button"
+                            data-doctor-name="Dr. A Kumar"
+                          >
+                            Edit
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Dr. B Fernando</td>
+                        <td><span class="grade-badge">A</span></td>
+                        <td>
+                          <span class="tag">Colombo South</span>
+                        </td>
+                        <td>
+                          <span class="status-tag status-tag--ok">Active</span>
+                        </td>
+                        <td>Rep 05 – I. Silva</td>
+                        <td>—</td>
+                        <td>2025-10-31</td>
+                        <td>
+                          <button
+                            class="link-button admin-doctor-edit"
+                            type="button"
+                            data-doctor-name="Dr. B Fernando"
+                          >
+                            Edit
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Dr. D Nuwan</td>
+                        <td><span class="grade-badge">C</span></td>
+                        <td>
+                          <span class="tag">Galle</span>
+                        </td>
+                        <td>
+                          <span class="status-tag status-tag--risk"
+                            >Retired</span
+                          >
+                        </td>
+                        <td>Rep 07 – D. Senanayake</td>
+                        <td>—</td>
+                        <td>2025-09-12</td>
+                        <td>
+                          <button
+                            class="link-button admin-doctor-edit"
+                            type="button"
+                            data-doctor-name="Dr. D Nuwan"
+                          >
+                            Edit
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+            </section>
+          </section>
+
+          <!-- ===================== -->
+          <!-- 16) Admin – Chemists  -->
+          <!-- ===================== -->
+          <section class="dashboard-view" data-view="admin-chemists">
+            <section class="filter-bar admin-filter-bar">
+              <div class="filter-group filter-group--search">
+                <div class="filter-label">Search chemist master</div>
+                <div class="filter-input filter-input--search">
+                  <input
+                    type="text"
+                    id="admin-chemist-search"
+                    placeholder="Name, territory…"
+                  />
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <div class="filter-label">Territory</div>
+                <div class="filter-input">
+                  <span>All territories</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+
+              <div class="filter-group admin-filter-actions">
+                <button
+                  class="btn btn-primary"
+                  id="btn-open-chemist-form"
+                  type="button"
+                >
+                  + Add chemist
+                </button>
+              </div>
+            </section>
+
+            <section class="content-grid admin-grid">
+              <!-- Chemist form -->
+              <article
+                class="chart-card admin-form-card"
+                id="chemist-form-card"
+              >
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Add chemist</div>
+                    <div class="card-subtitle">
+                      Maintain chemist master used for stock-out and coverage
+                      analytics.
+                    </div>
+                  </div>
+                  <div class="card-header-right">
+                    <button
+                      class="icon-button admin-form-close btn-cancel"
+                      type="button"
+                      aria-label="Close form"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+
+                <form class="form" id="chemist-form">
+                  <div class="form-grid-2">
+                    <div class="form-field">
+                      <label class="form-label" for="chemist-name-input"
+                        >Chemist name</label
+                      >
+                      <input
+                        id="chemist-name-input"
+                        class="input-text"
+                        type="text"
+                        placeholder="Pharmacy name"
+                        required
+                      />
+                    </div>
+
+                    <div class="form-field">
+                      <label class="form-label" for="chemist-territory-input"
+                        >Territory</label
+                      >
+                      <select id="chemist-territory-input" class="input-select">
+                        <option>Colombo North</option>
+                        <option>Colombo South</option>
+                        <option>Kandy</option>
+                        <option>Galle</option>
+                        <option>Negombo</option>
+                      </select>
+                    </div>
+
+                    <div class="form-field">
+                      <label class="form-label" for="chemist-channel-input"
+                        >Channel</label
+                      >
+                      <select id="chemist-channel-input" class="input-select">
+                        <option>Retail</option>
+                        <option>Hospital</option>
+                      </select>
+                    </div>
+
+                    <div class="form-field">
+                      <label class="form-label" for="chemist-status-input"
+                        >Status</label
+                      >
+                      <select id="chemist-status-input" class="input-select">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-field">
+                    <label class="form-label" for="chemist-remark-input"
+                      >Notes</label
+                    >
+                    <textarea
+                      id="chemist-remark-input"
+                      class="input-textarea"
+                      placeholder="Optional notes, e.g. chronic OOS, special terms…"
+                    ></textarea>
+                  </div>
+
+                  <div class="form-actions">
+                    <button class="btn btn-secondary btn-cancel" type="button">
+                      Cancel
+                    </button>
+                    <button class="btn btn-primary" type="submit">
+                      Save chemist
+                    </button>
+                  </div>
+                </form>
+              </article>
+
+              <!-- Chemist table -->
+              <article class="table-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Master – Chemists</div>
+                    <div class="card-subtitle">
+                      All chemists that reps can select in DCR / chemist
+                      reports.
+                    </div>
+                  </div>
+                  <div class="card-header-right">
+                    <span class="muted">Sample data</span>
+                  </div>
+                </div>
+
+                <div class="table-wrapper">
+                  <table id="admin-table-chemists">
+                    <thead>
+                      <tr>
+                        <th>Chemist</th>
+                        <th>Territory</th>
+                        <th>Channel</th>
+                        <th>Status</th>
+                        <th>Last OOS Date</th>
+                        <th>OOS Count (90d)</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>HealthPlus Pharmacy</td>
+                        <td>Colombo North</td>
+                        <td>Retail</td>
+                        <td>
+                          <span class="status-tag status-tag--ok">Active</span>
+                        </td>
+                        <td>2025-11-10</td>
+                        <td>5</td>
+                        <td>
+                          <button
+                            class="link-button admin-chemist-edit"
+                            type="button"
+                            data-chemist-name="HealthPlus Pharmacy"
+                          >
+                            Edit
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>CityCare Chemist</td>
+                        <td>Kandy</td>
+                        <td>Retail</td>
+                        <td>
+                          <span class="status-tag status-tag--ok">Active</span>
+                        </td>
+                        <td>2025-11-06</td>
+                        <td>4</td>
+                        <td>
+                          <button
+                            class="link-button admin-chemist-edit"
+                            type="button"
+                            data-chemist-name="CityCare Chemist"
+                          >
+                            Edit
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Central Hospital Pharmacy</td>
+                        <td>Colombo South</td>
+                        <td>Hospital</td>
+                        <td>
+                          <span class="status-tag status-tag--ok">Active</span>
+                        </td>
+                        <td>2025-10-28</td>
+                        <td>2</td>
+                        <td>
+                          <button
+                            class="link-button admin-chemist-edit"
+                            type="button"
+                            data-chemist-name="Central Hospital Pharmacy"
+                          >
+                            Edit
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+            </section>
+          </section>
+
+          <!-- ===================== -->
+          <!-- 17) Admin – Products  -->
+          <!-- ===================== -->
+          <section class="dashboard-view" data-view="admin-products">
+            <section class="filter-bar admin-filter-bar">
+              <div class="filter-group filter-group--search">
+                <div class="filter-label">Search product master</div>
+                <div class="filter-input filter-input--search">
+                  <input
+                    type="text"
+                    id="admin-product-search"
+                    placeholder="Name, molecule, category…"
+                  />
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <div class="filter-label">Priority</div>
+                <div class="filter-input">
+                  <span>All priorities</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+
+              <div class="filter-group admin-filter-actions">
+                <button
+                  class="btn btn-primary"
+                  id="btn-open-product-form"
+                  type="button"
+                >
+                  + Add product
+                </button>
+              </div>
+            </section>
+
+            <section class="content-grid admin-grid">
+              <!-- Product form -->
+              <article
+                class="chart-card admin-form-card"
+                id="product-form-card"
+              >
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Add product</div>
+                    <div class="card-subtitle">
+                      Maintain product master used in all detailing &amp;
+                      coverage views.
+                    </div>
+                  </div>
+                  <div class="card-header-right">
+                    <button
+                      class="icon-button admin-form-close btn-cancel"
+                      type="button"
+                      aria-label="Close form"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+
+                <form class="form" id="product-form">
+                  <div class="form-grid-2">
+                    <div class="form-field">
+                      <label class="form-label" for="product-name-input"
+                        >Product name</label
+                      >
+                      <input
+                        id="product-name-input"
+                        class="input-text"
+                        type="text"
+                        placeholder="Brand name"
+                        required
+                      />
+                    </div>
+
+                    <div class="form-field">
+                      <label class="form-label" for="product-molecule-input"
+                        >Molecule</label
+                      >
+                      <input
+                        id="product-molecule-input"
+                        class="input-text"
+                        type="text"
+                        placeholder="e.g. Metformin"
+                      />
+                    </div>
+
+                    <div class="form-field">
+                      <label class="form-label" for="product-category-input"
+                        >Therapy area</label
+                      >
+                      <input
+                        id="product-category-input"
+                        class="input-text"
+                        type="text"
+                        placeholder="Cardio / Diabetes / Neuro…"
+                      />
+                    </div>
+
+                    <div class="form-field">
+                      <label class="form-label" for="product-priority-input"
+                        >Priority</label
+                      >
+                      <select id="product-priority-input" class="input-select">
+                        <option>Focus</option>
+                        <option>Support</option>
+                        <option>Tail</option>
+                      </select>
+                    </div>
+
+                    <div class="form-field">
+                      <label class="form-label" for="product-status-input"
+                        >Status</label
+                      >
+                      <select id="product-status-input" class="input-select">
+                        <option value="Active">Active</option>
+                        <option value="Discontinued">Discontinued</option>
+                      </select>
+                    </div>
+
+                    <div class="form-field">
+                      <label class="form-label" for="product-launch-year-input"
+                        >Launch year</label
+                      >
+                      <input
+                        id="product-launch-year-input"
+                        class="input-text"
+                        type="number"
+                        min="1990"
+                        max="2099"
+                        step="1"
+                        placeholder="2020"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-field">
+                    <label class="form-label" for="product-remark-input"
+                      >Notes</label
+                    >
+                    <textarea
+                      id="product-remark-input"
+                      class="input-textarea"
+                      placeholder="Optional notes, e.g. key indications, positioning…"
+                    ></textarea>
+                  </div>
+
+                  <div class="form-actions">
+                    <button class="btn btn-secondary btn-cancel" type="button">
+                      Cancel
+                    </button>
+                    <button class="btn btn-primary" type="submit">
+                      Save product
+                    </button>
+                  </div>
+                </form>
+              </article>
+
+              <!-- Product table -->
+              <article class="table-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Master – Products</div>
+                    <div class="card-subtitle">
+                      Product list used in DCR, chemist reports and analytics.
+                    </div>
+                  </div>
+                  <div class="card-header-right">
+                    <span class="muted">Sample data</span>
+                  </div>
+                </div>
+
+                <div class="table-wrapper">
+                  <table id="admin-table-products">
+                    <thead>
+                      <tr>
+                        <th>Product</th>
+                        <th>Molecule</th>
+                        <th>Category</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Launch Year</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Prod A</td>
+                        <td>Molecule X</td>
+                        <td>Cardio</td>
+                        <td>Focus</td>
+                        <td>
+                          <span class="status-tag status-tag--ok">Active</span>
+                        </td>
+                        <td>2020</td>
+                        <td>
+                          <button
+                            class="link-button admin-product-edit"
+                            type="button"
+                            data-product-name="Prod A"
+                          >
+                            Edit
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Prod B</td>
+                        <td>Molecule Y</td>
+                        <td>Diabetes</td>
+                        <td>Focus</td>
+                        <td>
+                          <span class="status-tag status-tag--ok">Active</span>
+                        </td>
+                        <td>2019</td>
+                        <td>
+                          <button
+                            class="link-button admin-product-edit"
+                            type="button"
+                            data-product-name="Prod B"
+                          >
+                            Edit
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Prod F</td>
+                        <td>Molecule Q</td>
+                        <td>Cardio</td>
+                        <td>Support</td>
+                        <td>
+                          <span class="status-tag status-tag--ok">Active</span>
+                        </td>
+                        <td>2017</td>
+                        <td>
+                          <button
+                            class="link-button admin-product-edit"
+                            type="button"
+                            data-product-name="Prod F"
+                          >
+                            Edit
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+            </section>
+          </section>
+
+          <!-- ===================== -->
+          <!-- Detail Views (lazy loaded from /views) -->
+          <!-- ===================== -->
+
+          <section
+            class="dashboard-view"
+            data-view="doctor-detail"
+            data-view-url="views/doctor-detail.html"
+          >
+            <!-- doctor-detail.html content will be injected here -->
+          </section>
+
+          <section
+            class="dashboard-view"
+            data-view="rep-detail"
+            data-view-url="views/rep-detail.html"
+          >
+            <!-- rep-detail.html content will be injected here -->
+          </section>
+
+          <section
+            class="dashboard-view"
+            data-view="product-detail"
+            data-view-url="views/product-detail.html"
+          >
+            <!-- product-detail.html content will be injected here -->
+          </section>
+
+          <section
+            class="dashboard-view"
+            data-view="chemist-detail"
+            data-view-url="views/chemist-detail.html"
+          >
+            <!-- chemist-detail.html content will be injected here -->
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- Main script -->
+    <script src="js/app.js"></script>
+  </body>
+</html>
+

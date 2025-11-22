@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>repnexa – Healthcare Field Analytics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A modern, unified dashboard for healthcare field analytics - designed for medical representatives and managers."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --purple: #a855f7;
+        --purple-deep: #7c3aed;
+        --bg: #020617;
+        --bg-soft: #030712;
+        --text-main: #f9fafb;
+        --text-muted: #9ca3af;
+        --border-subtle: rgba(148, 163, 184, 0.35);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        min-height: 100vh;
+        background: radial-gradient(
+            circle at top left,
+            rgba(124, 58, 237, 0.35),
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at bottom right,
+            rgba(15, 23, 42, 0.9),
+            #020617
+          );
+        color: var(--text-main);
+        display: flex;
+        justify-content: center;
+        padding: 32px 16px 64px;
+        color-scheme: dark;
+        overflow-x: hidden;
+      }
+
+      .page-shell {
+        width: 100%;
+        max-width: 1180px;
+        margin: 0 auto;
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+        filter: blur(10px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out,
+          filter 1s ease-out;
+      }
+
+      .page-shell.page-loaded {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+
+      /* HEADER */
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 80px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .brand-logo {
+        width: 52px;
+        height: 52px;
+        border-radius: 20px;
+        background: radial-gradient(circle at 20% 0%, #f9a8ff, var(--purple));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 26px;
+        font-weight: 700;
+        box-shadow: 0 20px 40px rgba(168, 85, 247, 0.65);
+      }
+
+      .brand-text {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .brand-name {
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .brand-tagline {
+        font-size: 14px;
+        color: var(--text-muted);
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 28px;
+        border-radius: 999px;
+        border: 1px solid rgba(209, 213, 219, 0.2);
+        cursor: pointer;
+        background: radial-gradient(circle at 0 0, #f9a8ff, transparent 55%),
+          linear-gradient(135deg, var(--purple), var(--purple-deep));
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        box-shadow: 0 18px 45px rgba(124, 58, 237, 0.6);
+        transition: transform 0.16s ease, box-shadow 0.16s ease,
+          filter 0.16s ease, border-color 0.16s ease;
+        white-space: nowrap;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px) translateZ(0);
+        box-shadow: 0 26px 60px rgba(124, 58, 237, 0.75);
+        filter: brightness(1.06);
+        border-color: rgba(249, 250, 251, 0.32);
+      }
+
+      .btn-primary:active {
+        transform: translateY(0);
+        box-shadow: 0 14px 30px rgba(124, 58, 237, 0.55);
+      }
+
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 11px 24px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.7);
+        cursor: pointer;
+        background: rgba(15, 23, 42, 0.95);
+        color: var(--text-main);
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+        transition: transform 0.16s ease, box-shadow 0.16s ease,
+          border-color 0.16s ease, background 0.16s ease, color 0.16s ease;
+      }
+
+      .btn-secondary:hover {
+        transform: translateY(-2px);
+        border-color: rgba(249, 250, 251, 0.35);
+        background: radial-gradient(
+          circle at top left,
+          rgba(79, 70, 229, 0.75),
+          rgba(15, 23, 42, 1)
+        );
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.95);
+        color: #f9fafb;
+      }
+
+      /* HERO */
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.9fr);
+        gap: 48px;
+        align-items: center;
+      }
+
+      .hero-text {
+        max-width: 640px;
+      }
+
+      .hero-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 7px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.45);
+        background: linear-gradient(
+          135deg,
+          rgba(15, 23, 42, 0.9),
+          rgba(15, 23, 42, 0.7)
+        );
+        color: var(--text-muted);
+        font-size: 14px;
+        margin-bottom: 22px;
+        box-shadow: 0 14px 25px rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(12px);
+      }
+
+      .hero-pill-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: radial-gradient(circle at top, var(--purple), #22c55e);
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.12);
+      }
+
+      .hero-title {
+        font-size: clamp(42px, 5vw, 58px);
+        line-height: 1.05;
+        letter-spacing: -0.055em;
+        font-weight: 700;
+        margin-bottom: 18px;
+      }
+
+      .hero-title span {
+        background: linear-gradient(135deg, var(--purple-deep), var(--purple));
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+
+      .hero-subtitle {
+        font-size: 18px;
+        line-height: 1.8;
+        color: var(--text-muted);
+        max-width: 34rem;
+      }
+
+      .hero-actions {
+        margin-top: 24px;
+      }
+
+      /* HERO SIDE PANEL */
+
+      .hero-panel {
+        position: relative;
+        border-radius: 24px;
+        padding: 22px 22px 20px;
+        background: radial-gradient(
+            circle at top left,
+            rgba(168, 85, 247, 0.26),
+            transparent 55%
+          ),
+          linear-gradient(
+            145deg,
+            rgba(15, 23, 42, 0.98),
+            rgba(15, 23, 42, 0.94)
+          );
+        border: 1px solid rgba(55, 65, 81, 0.9);
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+        overflow: hidden;
+        backdrop-filter: blur(14px);
+        transform: translateY(0);
+        transition: transform 0.3s ease, box-shadow 0.3s ease,
+          border-color 0.3s ease;
+        animation: panelGlow 7s ease-in-out 0.8s infinite;
+      }
+
+      .hero-panel::before {
+        content: "";
+        position: absolute;
+        inset: -40%;
+        background: radial-gradient(
+          circle at 0% 0%,
+          rgba(248, 250, 252, 0.04),
+          transparent 55%
+        );
+        opacity: 0.9;
+        pointer-events: none;
+      }
+
+      .hero-panel:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 30px 70px rgba(15, 23, 42, 0.95),
+          0 0 0 1px rgba(129, 140, 248, 0.4);
+        border-color: rgba(129, 140, 248, 0.6);
+      }
+
+      .panel-title {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #e5e7eb;
+      }
+
+      .panel-subtitle {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-bottom: 16px;
+      }
+
+      .panel-metrics {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px 12px;
+        margin-bottom: 10px;
+      }
+
+      .panel-line {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 10px 12px;
+        border-radius: 16px;
+        background: radial-gradient(
+            circle at top left,
+            rgba(30, 64, 175, 0.4),
+            transparent 55%
+          ),
+          rgba(15, 23, 42, 0.96);
+        border: 1px solid rgba(55, 65, 81, 0.9);
+        font-size: 14px;
+      }
+
+      .panel-label {
+        color: var(--text-muted);
+        margin-bottom: 4px;
+      }
+
+      .panel-value {
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      .panel-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        margin-top: 12px;
+        color: var(--text-muted);
+      }
+
+      .panel-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #22c55e;
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.16);
+      }
+
+      /* SECTIONS & TYPOGRAPHY */
+
+      .section {
+        margin-top: 120px;
+      }
+
+      .section-inner {
+        max-width: 880px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .section-title {
+        font-size: 32px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        letter-spacing: -0.04em;
+      }
+
+      .section-subtitle {
+        font-size: 17px;
+        color: var(--text-muted);
+        margin: 0 auto 32px;
+        max-width: 44rem;
+        line-height: 1.8;
+      }
+
+      /* ABOUT BOX */
+
+      .section-about .section-inner {
+        max-width: 960px;
+        padding: 32px 32px 36px;
+        border-radius: 24px;
+        background: radial-gradient(
+          circle at top left,
+          rgba(15, 23, 42, 0.96),
+          rgba(15, 23, 42, 0.98)
+        );
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.92);
+      }
+
+      .section-about .section-title {
+        font-size: 38px;
+      }
+
+      .section-about .section-subtitle {
+        margin-bottom: 0;
+      }
+
+      /* FEATURES / ENHANCEMENTS GRID */
+
+      .features-row {
+        max-width: 960px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 28px;
+        font-size: 15px;
+        color: var(--text-muted);
+      }
+
+      .feature-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        padding: 24px 20px;
+        border-radius: 22px;
+        background: rgba(15, 23, 42, 0.92);
+        border: 1px solid rgba(55, 65, 81, 0.9);
+        box-shadow: 0 20px 44px rgba(15, 23, 42, 0.9);
+        text-align: center;
+        min-height: 190px;
+        transition: transform 0.18s ease, box-shadow 0.18s ease,
+          border-color 0.18s ease, background 0.18s ease;
+      }
+
+      .feature-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.95);
+        border-color: rgba(168, 85, 247, 0.9);
+        background: radial-gradient(
+          circle at top,
+          rgba(31, 41, 55, 1),
+          rgba(15, 23, 42, 1)
+        );
+      }
+
+      .feature-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(
+          circle at top left,
+          rgba(168, 85, 247, 0.32),
+          rgba(15, 23, 42, 1)
+        );
+        border: 1px solid rgba(168, 85, 247, 0.8);
+        box-shadow: 0 14px 30px rgba(15, 23, 42, 0.95);
+        color: #e5e7eb;
+        animation: iconPulse 6s ease-in-out infinite;
+      }
+
+      .feature-icon svg {
+        width: 26px;
+        height: 26px;
+        fill: currentColor;
+        opacity: 0.9;
+      }
+
+      .feature-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: var(--purple);
+        box-shadow: 0 0 0 6px rgba(168, 85, 247, 0.22);
+        flex-shrink: 0;
+      }
+
+      .feature-item span:last-child {
+        display: block;
+      }
+
+      /* TEAM SECTION */
+
+      .team-grid {
+        max-width: 1040px;
+        margin: 40px auto 0;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 28px;
+      }
+
+      .team-card {
+        position: relative;
+        background: radial-gradient(
+          circle at top,
+          rgba(15, 23, 42, 0.9),
+          rgba(15, 23, 42, 1)
+        );
+        border: 1px solid rgba(55, 65, 81, 0.8);
+        border-radius: 24px;
+        padding: 26px 20px 24px;
+        text-align: center;
+        transition: transform 0.22s ease, border-color 0.22s ease,
+          box-shadow 0.22s ease, background 0.22s ease;
+        overflow: hidden;
+      }
+
+      .team-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          120deg,
+          rgba(168, 85, 247, 0.14),
+          transparent 35%,
+          transparent 65%,
+          rgba(59, 130, 246, 0.12)
+        );
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.22s ease;
+      }
+
+      .team-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--purple);
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.95),
+          0 0 0 1px rgba(129, 140, 248, 0.4);
+        background: radial-gradient(
+          circle at top,
+          rgba(15, 23, 42, 0.9),
+          rgba(15, 23, 42, 1)
+        );
+      }
+
+      .team-card:hover::before {
+        opacity: 1;
+      }
+
+      .team-photo {
+        width: 130px;
+        height: 180px;
+        border-radius: 18px;
+        object-fit: cover;
+        margin: 0 auto 18px;
+        border: 2px solid var(--purple);
+        box-shadow: 0 18px 35px rgba(15, 23, 42, 0.95);
+      }
+
+      .team-name {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+
+      .team-linkedin {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--purple);
+        text-decoration: none;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(129, 140, 248, 0.45);
+        background: rgba(15, 23, 42, 0.95);
+        transition: color 0.2s ease, border-color 0.2s ease,
+          background 0.2s ease, transform 0.2s ease;
+      }
+
+      .team-linkedin:hover {
+        color: var(--purple-deep);
+        border-color: rgba(191, 219, 254, 0.7);
+        background: radial-gradient(
+          circle at top,
+          rgba(30, 64, 175, 0.6),
+          rgba(15, 23, 42, 0.98)
+        );
+        transform: translateY(-1px);
+      }
+
+      .team-linkedin svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      /* DEMO LINKS */
+
+      .demo-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .demo-link {
+        font-size: 14px;
+        padding: 9px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(75, 85, 99, 0.85);
+        background: linear-gradient(
+          135deg,
+          rgba(15, 23, 42, 0.98),
+          rgba(15, 23, 42, 1)
+        );
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: border-color 0.2s ease, color 0.2s ease,
+          background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      }
+
+      .demo-link:hover {
+        border-color: var(--purple);
+        color: var(--text-main);
+        background: radial-gradient(
+          circle at top left,
+          rgba(79, 70, 229, 0.8),
+          rgba(15, 23, 42, 1)
+        );
+        box-shadow: 0 12px 26px rgba(15, 23, 42, 0.95);
+        transform: translateY(-1px);
+      }
+
+      /* CONTACT SECTION */
+
+      #contact .contact-inner {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 32px 32px 36px;
+        border-radius: 24px;
+        background: radial-gradient(
+          circle at top right,
+          rgba(15, 23, 42, 0.98),
+          rgba(15, 23, 42, 1)
+        );
+        border: 1px solid rgba(148, 163, 184, 0.45);
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.95);
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        gap: 32px;
+      }
+
+      .contact-title {
+        font-size: 34px;
+        text-align: left;
+        margin-bottom: 10px;
+      }
+
+      .contact-subtitle {
+        text-align: left;
+        margin: 0 0 14px;
+        max-width: 32rem;
+      }
+
+      .contact-meta {
+        font-size: 13px;
+        color: var(--text-muted);
+        text-align: left;
+      }
+
+      .contact-meta strong {
+        color: var(--text-main);
+        font-weight: 500;
+      }
+
+      .contact-form {
+        display: grid;
+        gap: 12px;
+      }
+
+      .contact-row-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .contact-label {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+        display: block;
+      }
+
+      .contact-input,
+      .contact-textarea {
+        width: 100%;
+        background: rgba(15, 23, 42, 0.96);
+        border-radius: 12px;
+        border: 1px solid rgba(55, 65, 81, 0.95);
+        padding: 10px 12px;
+        font-size: 14px;
+        color: var(--text-main);
+        font-family: inherit;
+        outline: none;
+        resize: vertical;
+        min-height: 44px;
+        transition: border-color 0.18s ease, box-shadow 0.18s ease,
+          background 0.18s ease;
+      }
+
+      .contact-input::placeholder,
+      .contact-textarea::placeholder {
+        color: rgba(148, 163, 184, 0.7);
+      }
+
+      .contact-input:focus,
+      .contact-textarea:focus {
+        border-color: rgba(168, 85, 247, 0.9);
+        box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.6);
+        background: rgba(15, 23, 42, 0.98);
+      }
+
+      .contact-textarea {
+        min-height: 88px;
+      }
+
+      .contact-actions {
+        margin-top: 6px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .contact-hint {
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+
+      /* FOOTER */
+
+      .footer {
+        margin-top: 80px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(31, 41, 55, 0.9);
+        font-size: 12px;
+        color: var(--text-muted);
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .footer a {
+        color: var(--text-main);
+        text-decoration: none;
+        border-bottom: 1px dotted rgba(148, 163, 184, 0.6);
+      }
+
+      .footer a:hover {
+        border-bottom-style: solid;
+      }
+
+      /* KEYFRAME MICRO ANIMATIONS (panel, icons) */
+
+      @keyframes panelGlow {
+        0%,
+        100% {
+          box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+          border-color: rgba(55, 65, 81, 0.9);
+        }
+        50% {
+          box-shadow: 0 30px 80px rgba(15, 23, 42, 0.98);
+          border-color: rgba(129, 140, 248, 0.85);
+        }
+      }
+
+      @keyframes iconPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          box-shadow: 0 14px 30px rgba(15, 23, 42, 0.95);
+        }
+        50% {
+          transform: scale(1.06);
+          box-shadow: 0 20px 40px rgba(15, 23, 42, 1);
+        }
+      }
+
+      /* SCROLL REVEAL SYSTEM */
+
+      [data-animate] {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        will-change: opacity, transform;
+      }
+
+      [data-animate="up"] {
+        transform: translateY(40px);
+      }
+
+      [data-animate="down"] {
+        transform: translateY(-40px);
+      }
+
+      [data-animate="left"] {
+        transform: translateX(-40px);
+      }
+
+      [data-animate="right"] {
+        transform: translateX(40px);
+      }
+
+      [data-animate="fade"] {
+        transform: none;
+      }
+
+      [data-animate].is-visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* Stagger for feature cards */
+      .features-row .feature-item[data-animate]:nth-child(1) {
+        transition-delay: 0.05s;
+      }
+      .features-row .feature-item[data-animate]:nth-child(2) {
+        transition-delay: 0.1s;
+      }
+      .features-row .feature-item[data-animate]:nth-child(3) {
+        transition-delay: 0.15s;
+      }
+      .features-row .feature-item[data-animate]:nth-child(4) {
+        transition-delay: 0.2s;
+      }
+      .features-row .feature-item[data-animate]:nth-child(5) {
+        transition-delay: 0.25s;
+      }
+      .features-row .feature-item[data-animate]:nth-child(6) {
+        transition-delay: 0.3s;
+      }
+
+      /* Stagger for team cards */
+      .team-grid .team-card[data-animate]:nth-child(1) {
+        transition-delay: 0.05s;
+      }
+      .team-grid .team-card[data-animate]:nth-child(2) {
+        transition-delay: 0.1s;
+      }
+      .team-grid .team-card[data-animate]:nth-child(3) {
+        transition-delay: 0.15s;
+      }
+      .team-grid .team-card[data-animate]:nth-child(4) {
+        transition-delay: 0.2s;
+      }
+      .team-grid .team-card[data-animate]:nth-child(5) {
+        transition-delay: 0.25s;
+      }
+      .team-grid .team-card[data-animate]:nth-child(6) {
+        transition-delay: 0.3s;
+      }
+
+      /* RESPONSIVE */
+
+      @media (max-width: 960px) {
+        .hero {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 40px;
+        }
+
+        .hero-text {
+          max-width: 560px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .hero-subtitle {
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .hero-actions {
+          display: flex;
+          justify-content: center;
+        }
+
+        .hero-panel {
+          max-width: 420px;
+          margin: 0 auto;
+        }
+
+        .team-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        #contact .contact-inner {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .contact-title,
+        .contact-subtitle,
+        .contact-meta {
+          text-align: left;
+        }
+      }
+
+      @media (max-width: 700px) {
+        body {
+          padding: 24px 12px 40px;
+        }
+
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
+          margin-bottom: 56px;
+        }
+
+        .btn-primary {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .hero-title {
+          font-size: 32px;
+        }
+
+        .section {
+          margin-top: 88px;
+        }
+
+        .team-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .footer {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      /* Respect reduced motion preferences */
+      @media (prefers-reduced-motion: reduce) {
+        .page-shell {
+          opacity: 1;
+          transform: none;
+          filter: none;
+        }
+
+        [data-animate] {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+
+        .hero-panel {
+          animation: none;
+        }
+
+        .feature-icon {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <!-- HEADER -->
+      <header class="header" data-animate="down">
+        <div class="brand">
+          <div class="brand-logo">R</div>
+          <div class="brand-text">
+            <div class="brand-name">repnexa</div>
+            <div class="brand-tagline">Healthcare field analytics</div>
+          </div>
+        </div>
+
+        <a href="../Portal entrance/portal.html" class="btn-primary"
+          >Open Demo</a
+        >
+      </header>
+
+      <!-- HERO (TOP OF PAGE) -->
+      <main>
+        <section class="hero" data-animate="up">
+          <div class="hero-text">
+            <div class="hero-pill">
+              <span class="hero-pill-dot"></span>
+              Designed for medical reps and managers
+            </div>
+
+            <h1 class="hero-title">
+              A modern, unified dashboard for
+              <span>Healthcare Field Analytics</span>
+            </h1>
+
+            <p class="hero-subtitle">
+              A modern, unified dashboard that simplifies doctor visits, chemist
+              coverage, and rep expenses — designed for real medical field
+              teams.
+            </p>
+
+            <div class="hero-actions">
+              <a href="../Portal entrance/portal.html" class="btn-secondary"
+                >See demo</a
+              >
+            </div>
+          </div>
+
+          <!-- Minimal side panel -->
+          <aside class="hero-panel" aria-hidden="true" data-animate="left">
+            <div class="panel-title">Today · snapshot</div>
+            <p class="panel-subtitle">
+              A quick feel of what your dashboard might show.
+            </p>
+
+            <div class="panel-metrics">
+              <div class="panel-line">
+                <span class="panel-label">Doctor visits</span>
+                <span class="panel-value">18</span>
+              </div>
+              <div class="panel-line">
+                <span class="panel-label">Chemist visits</span>
+                <span class="panel-value">9</span>
+              </div>
+              <div class="panel-line">
+                <span class="panel-label">Missed doctors</span>
+                <span class="panel-value">3</span>
+              </div>
+              <div class="panel-line">
+                <span class="panel-label">Expenses logged</span>
+                <span class="panel-value">Rs. 84,500</span>
+              </div>
+            </div>
+
+            <div class="panel-tag">
+              <span class="panel-dot"></span>
+              All powered by your DCR, chemist, and expense data.
+            </div>
+          </aside>
+        </section>
+
+        <!-- ABOUT US SECTION -->
+        <section class="section section-about" data-animate="up">
+          <div class="section-inner">
+            <h2 class="section-title">About Us</h2>
+            <p class="section-subtitle">
+              repnexa's mission is to transform how medical representatives and
+              managers track field operations by providing a clean, intelligent,
+              and data-driven platform. We eliminate manual reporting, reduce
+              inefficiencies, and deliver real-time insights that improve
+              coverage, decision-making, and productivity.
+            </p>
+          </div>
+        </section>
+
+        <!-- CORE FEATURES -->
+        <section class="section" data-animate="up">
+          <div class="section-inner">
+            <h2 class="section-title">Core Features</h2>
+            <p class="section-subtitle">
+              No extra noise. Just the essential tools for your healthcare field
+              operations.
+            </p>
+          </div>
+
+          <div class="features-row">
+            <div class="feature-item" data-animate="up">
+              <div class="feature-icon">
+                <!-- Doctor visits / insights icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="4" y="4" width="16" height="4" rx="1.5"></rect>
+                  <rect x="4" y="10" width="10" height="4" rx="1.5"></rect>
+                  <rect x="4" y="16" width="7" height="4" rx="1.5"></rect>
+                  <circle cx="18" cy="12" r="3"></circle>
+                </svg>
+              </div>
+              <span class="feature-dot"></span>
+              <span>Doctor visit tracking & missed call insights</span>
+            </div>
+            <div class="feature-item" data-animate="up">
+              <div class="feature-icon">
+                <!-- Chemist / shelves icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="3" rx="1"></rect>
+                  <rect x="3" y="10" width="18" height="3" rx="1"></rect>
+                  <rect x="3" y="15" width="18" height="3" rx="1"></rect>
+                  <circle cx="8" cy="16.5" r="1.2"></circle>
+                  <circle cx="16" cy="11.5" r="1.2"></circle>
+                </svg>
+              </div>
+              <span class="feature-dot"></span>
+              <span>Chemist coverage and product availability</span>
+            </div>
+            <div class="feature-item" data-animate="up">
+              <div class="feature-icon">
+                <!-- Expense / card icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="6" width="18" height="12" rx="2"></rect>
+                  <rect x="3" y="9" width="18" height="2"></rect>
+                  <rect x="7" y="14" width="4" height="2" rx="1"></rect>
+                  <rect x="13" y="14" width="4" height="2" rx="1"></rect>
+                </svg>
+              </div>
+              <span class="feature-dot"></span>
+              <span>Expense & mileage calculator with monthly summary</span>
+            </div>
+            <div class="feature-item" data-animate="up">
+              <div class="feature-icon">
+                <!-- Analytics / trend icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <polyline
+                    points="4,16 9,10 14,13 20,6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></polyline>
+                  <circle cx="9" cy="10" r="1.2"></circle>
+                  <circle cx="14" cy="13" r="1.2"></circle>
+                  <circle cx="20" cy="6" r="1.2"></circle>
+                  <circle cx="4" cy="16" r="1.2"></circle>
+                </svg>
+              </div>
+              <span class="feature-dot"></span>
+              <span>Territory performance and trend analytics</span>
+            </div>
+            <div class="feature-item" data-animate="up">
+              <div class="feature-icon">
+                <!-- Admin / sliders icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="5" y="5" width="2" height="14" rx="1"></rect>
+                  <rect x="11" y="5" width="2" height="14" rx="1"></rect>
+                  <rect x="17" y="5" width="2" height="14" rx="1"></rect>
+                  <circle cx="6" cy="10" r="1.6"></circle>
+                  <circle cx="12" cy="14" r="1.6"></circle>
+                  <circle cx="18" cy="9" r="1.6"></circle>
+                </svg>
+              </div>
+              <span class="feature-dot"></span>
+              <span>Admin panel & master lists management</span>
+            </div>
+            <div class="feature-item" data-animate="up">
+              <div class="feature-icon">
+                <!-- DCR / document icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="6" y="4" width="12" height="16" rx="2"></rect>
+                  <rect x="8" y="8" width="8" height="1.6" rx="0.8"></rect>
+                  <rect x="8" y="11" width="8" height="1.6" rx="0.8"></rect>
+                  <path
+                    d="M10 16h4"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  ></path>
+                  <path
+                    d="M12 14v4"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
+              </div>
+              <span class="feature-dot"></span>
+              <span>Add Easy DCR data submission</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- FUTURE ENHANCEMENTS -->
+        <section class="section" data-animate="up">
+          <div class="section-inner">
+            <h2 class="section-title">Future Enhancements</h2>
+            <p class="section-subtitle">
+              Coming soon: Advanced features to take your field operations to
+              the next level.
+            </p>
+          </div>
+
+          <div class="features-row">
+            <div class="feature-item" data-animate="up">
+              <div class="feature-icon">
+                <!-- AI recommendations icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <path
+                    d="M12 3v2.5M12 18.5V21M4.5 12H3M21 12h-1.5M6.4 6.4 5 5M19 19l-1.4-1.4M17.6 6.4 19 5M5 19l1.4-1.4"
+                    stroke="currentColor"
+                    stroke-width="1.4"
+                    stroke-linecap="round"
+                    fill="none"
+                  ></path>
+                </svg>
+              </div>
+              <span class="feature-dot"></span>
+              <span>AI-based visit recommendations</span>
+            </div>
+            <div class="feature-item" data-animate="up">
+              <div class="feature-icon">
+                <!-- Stock / boxes icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="4" y="5" width="7" height="6" rx="1.2"></rect>
+                  <rect x="13" y="5" width="7" height="6" rx="1.2"></rect>
+                  <rect x="4" y="13" width="7" height="6" rx="1.2"></rect>
+                  <rect x="13" y="13" width="7" height="6" rx="1.2"></rect>
+                </svg>
+              </div>
+              <span class="feature-dot"></span>
+              <span>Predictive chemist stock alerts</span>
+            </div>
+            <div class="feature-item" data-animate="up">
+              <div class="feature-icon">
+                <!-- GPS / pin icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M12 4.5a4 4 0 0 0-4 4c0 2.8 4 7 4 7s4-4.2 4-7a4 4 0 0 0-4-4z"
+                  ></path>
+                  <circle cx="12" cy="8.5" r="1.5" fill="#020617"></circle>
+                  <path
+                    d="M6 19h12"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    fill="none"
+                  ></path>
+                </svg>
+              </div>
+              <span class="feature-dot"></span>
+              <span>GPS auto check-in for field visits</span>
+            </div>
+            <div class="feature-item" data-animate="up">
+              <div class="feature-icon">
+                <!-- Verification / shield icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M12 3.5 6 6v5.2c0 3.6 2.4 6.8 6 7.8 3.6-1 6-4.2 6-7.8V6l-6-2.5z"
+                  ></path>
+                  <path
+                    d="M9.5 12.2 11 13.7 14.5 10.2"
+                    stroke="#020617"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill="none"
+                  ></path>
+                </svg>
+              </div>
+              <span class="feature-dot"></span>
+              <span>Automated expense verification</span>
+            </div>
+            <div class="feature-item" data-animate="up">
+              <div class="feature-icon">
+                <!-- Chat bubbles icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="4" y="5" width="10" height="7" rx="2"></rect>
+                  <path
+                    d="M7 16v-2h6a2 2 0 0 0 2-2v-1.5h1a2 2 0 0 1 2 2V17l-2.2-1H11"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
+              </div>
+              <span class="feature-dot"></span>
+              <span>Manager–Rep chat system</span>
+            </div>
+            <div class="feature-item" data-animate="up">
+              <div class="feature-icon">
+                <!-- Mobile app icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="8" y="3.5" width="8" height="17" rx="2"></rect>
+                  <rect x="10" y="6" width="4" height="1.6" rx="0.8"></rect>
+                  <circle cx="12" cy="17" r="1"></circle>
+                </svg>
+              </div>
+              <span class="feature-dot"></span>
+              <span>Mobile App (Android + iOS)</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- MEET THE TEAM -->
+        <section class="section" data-animate="up">
+          <div class="section-inner">
+            <h2 class="section-title">Meet the Team</h2>
+            <p class="section-subtitle">
+              The people behind repnexa, building the future of healthcare field
+              analytics.
+            </p>
+          </div>
+
+          <div class="team-grid">
+            <div class="team-card" data-animate="up">
+              <img
+                src="https://via.placeholder.com/140x180"
+                alt="Nirmani Yasasiri"
+                class="team-photo"
+              />
+              <div class="team-name">Nirmani Yasasiri</div>
+              <a
+                href="https://www.linkedin.com/in/yourprofile"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="team-linkedin"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                </svg>
+                LinkedIn
+              </a>
+            </div>
+
+            <div class="team-card" data-animate="up">
+              <img
+                src="https://via.placeholder.com/140x180"
+                alt="Team Member 2"
+                class="team-photo"
+              />
+              <div class="team-name">Member 2</div>
+              <a
+                href="https://www.linkedin.com/in/yourprofile"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="team-linkedin"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                </svg>
+                LinkedIn
+              </a>
+            </div>
+
+            <div class="team-card" data-animate="up">
+              <img
+                src="https://via.placeholder.com/140x180"
+                alt="Team Member 3"
+                class="team-photo"
+              />
+              <div class="team-name">Member 3</div>
+              <a
+                href="https://www.linkedin.com/in/yourprofile"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="team-linkedin"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                </svg>
+                LinkedIn
+              </a>
+            </div>
+
+            <div class="team-card" data-animate="up">
+              <img
+                src="https://via.placeholder.com/140x180"
+                alt="Team Member 4"
+                class="team-photo"
+              />
+              <div class="team-name">Member 4</div>
+              <a
+                href="https://www.linkedin.com/in/yourprofile"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="team-linkedin"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                </svg>
+                LinkedIn
+              </a>
+            </div>
+
+            <div class="team-card" data-animate="up">
+              <img
+                src="https://via.placeholder.com/140x180"
+                alt="Team Member 5"
+                class="team-photo"
+              />
+              <div class="team-name">Member 5</div>
+              <a
+                href="https://www.linkedin.com/in/yourprofile"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="team-linkedin"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                </svg>
+                LinkedIn
+              </a>
+            </div>
+
+            <div class="team-card" data-animate="up">
+              <img
+                src="https://via.placeholder.com/140x180"
+                alt="Team Member 6"
+                class="team-photo"
+              />
+              <div class="team-name">Member 6</div>
+              <a
+                href="https://www.linkedin.com/in/yourprofile"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="team-linkedin"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                </svg>
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- DEMO SECTION -->
+        <section class="section" id="demo" data-animate="up">
+          <div class="section-inner">
+            <h2 class="section-title">Explore Demo Screens</h2>
+            <p class="section-subtitle">
+              Jump straight into the different views of the platform.
+            </p>
+
+            <div class="demo-links">
+              <a href="#" class="demo-link">Company Dashboard</a>
+              <a href="#" class="demo-link">Medical Rep View</a>
+              <a href="#" class="demo-link">Master List Manager</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTACT US SECTION -->
+        <section class="section" id="contact" data-animate="up">
+          <div class="contact-inner">
+            <div>
+              <h2 class="section-title contact-title">Contact Us</h2>
+              <p class="section-subtitle contact-subtitle">
+                Got a question about repnexa, want to see a live walkthrough, or
+                explore how it fits your existing workflows? Send us a note and
+                we’ll get back to you.
+              </p>
+              <p class="contact-meta">
+                <strong>Typical response time:</strong> within 1–2 business
+                days.<br />
+                You can also reach us at <strong>hello@repnexa.com</strong>.
+              </p>
+            </div>
+
+            <form class="contact-form">
+              <div class="contact-row-2">
+                <div>
+                  <label class="contact-label" for="name">Name</label>
+                  <input
+                    id="name"
+                    type="text"
+                    class="contact-input"
+                    placeholder="Your full name"
+                  />
+                </div>
+                <div>
+                  <label class="contact-label" for="company">Company</label>
+                  <input
+                    id="company"
+                    type="text"
+                    class="contact-input"
+                    placeholder="Company or organization"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="contact-label" for="email">Work Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  class="contact-input"
+                  placeholder="you@company.com"
+                />
+              </div>
+
+              <div>
+                <label class="contact-label" for="message"
+                  >How can we help?</label
+                >
+                <textarea
+                  id="message"
+                  class="contact-textarea"
+                  placeholder="Tell us a bit about your team, current tools, and what you’d like to improve..."
+                ></textarea>
+              </div>
+
+              <div class="contact-actions">
+                <button type="button" class="btn-primary">Send message</button>
+                <span class="contact-hint"
+                  >This is a sample form – wire it up to your backend or form
+                  tool.</span
+                >
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <span>© 2025 repnexa</span>
+        <span>
+          Built for medical representatives and managers. Designed and developed
+          by Team repnexa. · <a href="#contact">Contact us</a>
+        </span>
+      </footer>
+    </div>
+
+    <!-- SCROLL + LOAD ANIMATIONS SCRIPT -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const shell = document.querySelector(".page-shell");
+        if (shell) {
+          // initial page load animation
+          requestAnimationFrame(() => {
+            shell.classList.add("page-loaded");
+          });
+        }
+
+        const animatedEls = document.querySelectorAll("[data-animate]");
+        if ("IntersectionObserver" in window) {
+          const observer = new IntersectionObserver(
+            (entries, obs) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-visible");
+                  obs.unobserve(entry.target);
+                }
+              });
+            },
+            {
+              threshold: 0.18,
+            }
+          );
+
+          animatedEls.forEach((el) => observer.observe(el));
+        } else {
+          // Fallback: show everything if IntersectionObserver isn't supported
+          animatedEls.forEach((el) => el.classList.add("is-visible"));
+        }
+      });
+    </script>
+  </body>
+</html>

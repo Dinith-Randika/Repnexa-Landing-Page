@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Product Detail – Analytics UI</title>
+    <!-- 👇 this is the important part -->
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <main class="dashboard-main">
+      <!-- views/product-detail.html -->
+      <section class="dashboard-view is-active" data-view="product-detail">
+        <!-- Top filters -->
+        <section class="filter-bar">
+          <div class="filter-group filter-group--search">
+            <div class="filter-label">Product</div>
+            <div class="filter-input filter-input--search">
+              <input
+                type="text"
+                placeholder="Search product by name or molecule…"
+                value="Prod A (Key Cardio SKU)"
+              />
+            </div>
+          </div>
+
+            <div class="filter-group">
+          <div class="filter-label">Start Date</div>
+          <div class=>
+              <input id="dcr-date" type="date" class="input-text" />
+            
+          </div>
+        </div>
+
+         <div class="filter-group">
+          <div class="filter-label">End Date</div>
+          <div class=>
+              <input id="dcr-date" type="date" class="input-text" />
+            
+          </div>
+        </div>
+          <div class="filter-group">
+            <div class="filter-label">Territory</div>
+            <div class="filter-input">
+              <span>All territories</span>
+              <span class="filter-chevron">▾</span>
+            </div>
+          </div>
+
+     
+
+        <!-- Product KPIs -->
+        <section class="kpi-row">
+          <article class="kpi-card">
+            <div class="kpi-label">Product</div>
+            <div class="kpi-value">Prod A</div>
+            <div class="kpi-delta">
+              <span>Cardio • Focus SKU</span>
+            </div>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-label">A-grade Doctors Covered</div>
+            <div class="kpi-value">178</div>
+            <div class="kpi-delta delta-success">
+              <span class="delta-icon">▲</span>
+              <span>Strong A-grade reach</span>
+            </div>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-label">Total Detailing Calls</div>
+            <div class="kpi-value">932</div>
+            <div class="kpi-delta">
+              <span>All grades</span>
+            </div>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-label">Last Detailed</div>
+            <div class="kpi-value">2025-11-14</div>
+            <div class="kpi-delta">
+              <span>Across all reps</span>
+            </div>
+          </article>
+        </section>
+
+        <!-- Layout: snapshot + coverage + trend + OOS + top doctors -->
+        <section class="content-grid">
+          <!-- Snapshot -->
+          <article class="chart-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Product Snapshot</div>
+                <div class="card-subtitle">Static summary for the selected SKU</div>
+              </div>
+            </div>
+
+            <div class="card-subtitle"><strong>Molecule:</strong> Molecule X</div>
+            <div class="card-subtitle"><strong>Category:</strong> Cardio</div>
+            <div class="card-subtitle">
+              <strong>Priority:</strong>
+              <span class="tag">Focus</span>
+            </div>
+            <div class="card-subtitle">
+              <strong>Status:</strong>
+              <span class="status-tag status-tag--ok">Active</span>
+            </div>
+            <div class="card-subtitle"><strong>Launch year:</strong> 2020</div>
+          </article>
+
+          <!-- Small coverage by grade (mini bar-like layout) -->
+          <article class="chart-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Coverage by Grade (Prod A)</div>
+                <div class="card-subtitle">
+                  Unique doctors detailed in selected period
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-bars chart-bars-horizontal">
+              <div class="chart-bar-horizontal-group">
+                <div
+                  class="chart-bar-horizontal chart-bar-horizontal--good"
+                  style="width: 100%"
+                >
+                  A-grade – 178
+                </div>
+              </div>
+              <div class="chart-bar-horizontal-group">
+                <div
+                  class="chart-bar-horizontal chart-bar-horizontal--ok"
+                  style="width: 80%"
+                >
+                  B-grade – 210
+                </div>
+              </div>
+              <div class="chart-bar-horizontal-group">
+                <div
+                  class="chart-bar-horizontal chart-bar-horizontal--warn"
+                  style="width: 50%"
+                >
+                  C-grade – 96
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Line chart: calls over time -->
+          <article class="chart-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Detailing Calls Over Time</div>
+                <div class="card-subtitle">
+                  Number of calls where Prod A was promoted
+                </div>
+              </div>
+            </div>
+
+            <div class="line-chart">
+              <svg viewBox="0 0 300 160" preserveAspectRatio="none">
+                <line class="line-chart-axis" x1="20" y1="10" x2="20" y2="140" />
+                <line class="line-chart-axis" x1="20" y1="140" x2="290" y2="140" />
+                <polyline
+                  class="line-chart-line-mileage"
+                  points="20,125 80,105 140,90 200,80 260,70"
+                ></polyline>
+              </svg>
+              <div class="line-chart-legend">
+                <span class="legend-item">
+                  <span class="legend-dot legend-dot--mileage"></span>
+                  Calls including Prod A
+                </span>
+              </div>
+            </div>
+            <div class="chart-caption">
+              A simple static trend so you can see the UI — not wired to data yet.
+            </div>
+          </article>
+
+          <!-- Compact stock-out summary -->
+          <article class="chart-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Stock-Out Summary (Prod A)</div>
+                <div class="card-subtitle">
+                  High-level OOS view for this product only
+                </div>
+              </div>
+            </div>
+
+            <section class="kpi-row kpi-row--stock">
+              <article class="kpi-card">
+                <div class="kpi-label">OOS Events (Last Month)</div>
+                <div class="kpi-value">22</div>
+                <div class="kpi-delta delta-warning">
+                  <span class="delta-icon">●</span>
+                  <span>Needs follow-up with distribution</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Most OOS Chemist</div>
+                <div class="kpi-value">Healthplus Pharmacy</div>
+                <div class="kpi-delta delta-error">
+                  <span class="delta-icon">▼</span>
+                  <span>5 OOS events</span>
+                </div>
+              </article>
+            </section>
+
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Chemist</th>
+                    <th>Territory</th>
+                    <th>OOS Events</th>
+                    <th>Last OOS Date</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="row-risk">
+                    <td>HealthPlus Pharmacy</td>
+                    <td>Colombo North</td>
+                    <td>5</td>
+                    <td>2025-11-10</td>
+                    
+                  </tr>
+                  <tr class="row-risk">
+                    <td>CityCare Chemist</td>
+                    <td>Kandy</td>
+                    <td>4</td>
+                    <td>2025-11-06</td>
+                  </tr>
+                  <tr>
+                    <td>Sunrise Pharmacy</td>
+                    <td>Galle</td>
+                    <td>3</td>
+                    <td>2025-11-03</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card-header-right chip">
+                    <a href="https://google.com">see more...</a>
+                </div>
+          </article>
+
+          <!-- Top doctors for this product -->
+          <article class="table-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Top Doctors for This Product</div>
+                <div class="card-subtitle">
+                  Doctors with highest call volume for Prod A
+                </div>
+              </div>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Doctor</th>
+                    <th>Grade</th>
+                    <th>Territory</th>
+                    <th># Calls (Period)</th>
+                    <th>Last Detailed</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Dr. A Kumar</td>
+                    <td><span class="grade-badge">A</span></td>
+                    <td>Colombo North</td>
+                    <td>12</td>
+                    <td>2025-11-14</td>
+                  </tr>
+                  <tr>
+                    <td>Dr. B Fernando</td>
+                    <td><span class="grade-badge">A</span></td>
+                    <td>Colombo South</td>
+                    <td>9</td>
+                    <td>2025-11-10</td>
+                  </tr>
+                  <tr>
+                    <td>Dr. C Jayasinghe</td>
+                    <td><span class="grade-badge">B</span></td>
+                    <td>Kandy</td>
+                    <td>7</td>
+                    <td>2025-11-08</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      </section>
+    </main>
+  </body>
+</html>
+

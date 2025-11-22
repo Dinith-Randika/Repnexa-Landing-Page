@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Doctor Detail – Analytics UI</title>
+    <!-- 👇 this is the important part -->
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <main class="dashboard-main">
+    <!-- views/doctor-detail.html -->
+    <section class="dashboard-view is-active" data-view="doctor-detail">
+      <!-- Top filters – mock “selected doctor” search -->
+      <section class="filter-bar">
+        <div class="filter-group filter-group--search">
+          <div class="filter-label">Doctor</div>
+          <div class="filter-input filter-input--search">
+            <input
+              type="text"
+              placeholder="Search doctor by name, speciality, territory…"
+              value="Dr. A Kumar (Cardiology, Grade A)"
+            />
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-label">Start Date</div>
+          <div class=>
+              <input id="dcr-date" type="date" class="input-text" />
+            
+          </div>
+        </div>
+
+         <div class="filter-group">
+          <div class="filter-label">End Date</div>
+          <div class=>
+              <input id="dcr-date" type="date" class="input-text" />
+            
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-label">Territory</div>
+          <div class="filter-input">
+            <span>Colombo North</span>
+            <span class="filter-chevron">▾</span>
+          </div>
+        </div>
+
+        
+      </section>
+
+      <!-- Doctor-specific KPIs -->
+      <section class="kpi-row">
+        <article class="kpi-card">
+          <div class="kpi-label">Doctor</div>
+          <div class="kpi-value">Dr. A Kumar</div>
+          <div class="kpi-delta">
+            <span>Cardiology • Grade <span class="grade-badge">A</span></span>
+          </div>
+        </article>
+
+        <article class="kpi-card">
+          <div class="kpi-label">Total Visits (90 days)</div>
+          <div class="kpi-value">8</div>
+          <div class="kpi-delta delta-success">
+            <span class="delta-icon">▲</span>
+            <span>Improving vs last period</span>
+          </div>
+        </article>
+
+        <article class="kpi-card">
+          <div class="kpi-label">Avg Visits / Month</div>
+          <div class="kpi-value">2.7</div>
+          <div class="kpi-delta delta-warning">
+            <span class="delta-icon">●</span>
+            <span>Target: 4 / month</span>
+          </div>
+        </article>
+
+        <article class="kpi-card">
+          <div class="kpi-label">Last Visit</div>
+          <div class="kpi-value">2025-11-14</div>
+          <div class="kpi-delta">
+            <span>By Rep 03 – S. Perera</span>
+          </div>
+        </article>
+      </section>
+
+      <!-- Snapshot + product breakdown + line chart -->
+      <section class="content-grid">
+        <!-- Doctor snapshot -->
+        <article class="chart-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Doctor Profile</div>
+              <div class="card-subtitle">
+                Basic master data for the selected doctor
+              </div>
+            </div>
+          </div>
+
+          <div class="card-subtitle"><strong>Speciality:</strong> Cardiology</div>
+          <div class="card-subtitle">
+            <strong>Grade:</strong>
+            <span class="grade-badge">A</span>
+          </div>
+          <div class="card-subtitle">
+            <strong>Locations:</strong>
+            <span class="tag">Colombo North</span>
+            <span class="tag">Kandy</span>
+          </div>
+          <div class="card-subtitle">
+            <strong>Assigned reps:</strong>
+            <span class="tag">Rep 03 – S. Perera</span>
+            <span class="tag">Rep 01 – H. Jayasuriya</span>
+          </div>
+          <div class="card-subtitle">
+            <strong>Status:</strong>
+            <span class="status-tag status-tag--ok">Active</span>
+          </div>
+        </article>
+
+        <!-- Mini product breakdown for this doctor -->
+        <article class="chart-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Products Promoted to This Doctor</div>
+              <div class="card-subtitle">
+                Calls by product in the selected period
+              </div>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Calls </th>
+                  <th>Calls (Last 90d)</th>
+                  <th>Last Detailed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Prod A</td>
+                  <td>3</td>
+                  <td>8</td>
+                  <td>2025-11-14</td>
+                </tr>
+                <tr>
+                  <td>Prod B</td>
+                  <td>2</td>
+                  <td>5</td>
+                  <td>2025-11-07</td>
+                </tr>
+                <tr>
+                  <td>Prod C</td>
+                  <td>1</td>
+                  <td>3</td>
+                  <td>2025-10-29</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        
+
+        <!-- Visit log for this doctor -->
+        <article class="table-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Visit Log – This Doctor</div>
+              <div class="card-subtitle">
+                All visits to Dr. A Kumar in the selected period
+              </div>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Rep</th>
+                  <th>Territory</th>
+                  <th>Products Detailed</th>
+                  <th>Remark</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2025-11-14</td>
+                  <td>Rep 03 – S. Perera</td>
+                  <td>Colombo North</td>
+                  <td>Prod A, Prod B</td>
+                  
+                  <td>Follow-up on BP control</td>
+                </tr>
+                <tr>
+                  <td>2025-11-05</td>
+                  <td>Rep 03 – S. Perera</td>
+                  <td>Colombo North</td>
+                  <td>Prod A</td>
+                  
+                  <td>Discussed new guideline</td>
+                </tr>
+                <tr>
+                  <td>2025-10-25</td>
+                  <td>Rep 01 – H. Jayasuriya</td>
+                  <td>Kandy</td>
+                  <td>Prod C</td>
+                  
+                  <td>Post-conference visit</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+    </section>
+
+      </section>
+    </main>
+  </body>
+</html>
+
+
+

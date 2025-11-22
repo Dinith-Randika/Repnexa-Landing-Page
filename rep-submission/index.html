@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>repnexa – Field Submission</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/rep-submission.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Hidden checkbox used to toggle the hamburger menu (moved from nav) -->
+      <input
+        type="checkbox"
+        id="tab-nav-toggle"
+        class="tab-nav-toggle-checkbox"
+        aria-hidden="true"
+      />
+
+      <!-- Top bar -->
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <!-- Hamburger button - now in header -->
+          <label
+            class="tab-nav-toggle"
+            for="tab-nav-toggle"
+            aria-label="Toggle navigation"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </label>
+
+          <div class="logo-badge">R</div>
+          <div>
+            <div class="app-title">repnexa Field App</div>
+            <div class="app-subtitle">
+              Daily submissions · <span id="current-date-text">Today</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="top-bar-right">
+          <div class="rep-meta">
+            <div class="rep-label">Logged in as</div>
+            <div class="rep-name" id="rep-name-text">Rep 03 – S. Perera</div>
+          </div>
+          <div class="rep-avatar">
+            <span>SP</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Tab navigation (now navbar with hamburger) -->
+      <!-- Tab navigation -->
+      <nav class="tab-nav">
+        <div class="tab-nav-items">
+          <button
+            class="tab-nav-item is-active"
+            type="button"
+            data-view-target="dcr"
+          >
+            DCR – Doctor Visits
+          </button>
+          <button class="tab-nav-item" type="button" data-view-target="todo">
+            Doctor To-Do
+          </button>
+          <button class="tab-nav-item" type="button" data-view-target="chemist">
+            Chemist Report
+          </button>
+          <button
+            class="tab-nav-item"
+            type="button"
+            data-view-target="expenses"
+          >
+            Expenses
+          </button>
+        </div>
+      </nav>
+
+      <main class="main">
+        <!-- Global info banner -->
+        <section class="info-banner">
+          <div class="info-dot"></div>
+          <div class="info-text">
+            A-grade doctors must be visited at least once every 2 weeks. Missed
+            A-grade doctors will trigger notifications.
+          </div>
+        </section>
+
+        <!-- Summary + Alerts -->
+        <section class="summary-row">
+          <article class="summary-card">
+            <header class="summary-card-header">
+              <h2 class="summary-title">Today’s progress</h2>
+              <span class="summary-badge">Live</span>
+            </header>
+            <div class="summary-stats">
+              <div class="summary-stat">
+                <div class="summary-stat-label">Doctors logged</div>
+                <div class="summary-stat-value" id="summary-doctors-count">
+                  0
+                </div>
+              </div>
+              <div class="summary-stat">
+                <div class="summary-stat-label">Chemists logged</div>
+                <div class="summary-stat-value" id="summary-chemists-count">
+                  0
+                </div>
+              </div>
+              <div class="summary-stat">
+                <div class="summary-stat-label">Expenses entries</div>
+                <div class="summary-stat-value" id="summary-expenses-count">
+                  0
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="summary-card summary-card--alerts">
+            <header class="summary-card-header">
+              <h2 class="summary-title">Alerts</h2>
+            </header>
+            <ul class="alerts-list" id="alerts-list">
+              <li class="alert-item alert-item--warning">
+                <span class="alert-dot"></span>
+                <span class="alert-text">
+                  Sample: Dr. A Kumar (A) not visited in last 14 days.
+                </span>
+              </li>
+              <li class="alert-item alert-item--info">
+                <span class="alert-dot"></span>
+                <span class="alert-text">
+                  Sample: Master list update – Dr. D Nuwan marked as Retired.
+                </span>
+              </li>
+            </ul>
+            <p class="alerts-helper">
+              In production this will show real missed-doctor &amp; master-list
+              changes for you.
+            </p>
+          </article>
+        </section>
+
+        <!-- ===================== -->
+        <!-- 1) DCR – Doctor Visits -->
+        <!-- ===================== -->
+        <section class="view is-active" data-view="dcr">
+          <!-- Basics -->
+          <section class="card">
+            <header class="card-header">
+              <div>
+                <h2 class="card-title">Daily Call Report</h2>
+                <p class="card-subtitle">
+                  Fill doctor visits and missed doctors for this day.
+                </p>
+              </div>
+            </header>
+            <div class="card-body">
+              <div class="form-grid-2">
+                <div class="form-field">
+                  <label class="form-label" for="dcr-date">Date</label>
+                  <input id="dcr-date" type="date" class="input-text" />
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="dcr-territory">
+                    Territory / Station
+                  </label>
+                  <select
+                    id="dcr-territory"
+                    class="input-select territory-select"
+                  >
+                    <option>Colombo North</option>
+                    <option>Colombo South</option>
+                    <option>Kandy</option>
+                    <option>Galle</option>
+                    <option>Negombo</option>
+                  </select>
+                  <p class="form-helper">
+                    Defaulted from your assigned territory – change only if
+                    needed.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Doctor visits -->
+          <section class="card">
+            <header class="card-header card-header--with-action">
+              <div>
+                <h2 class="card-title">
+                  Doctor visits
+                  <span class="card-title-count" id="dcr-doctor-count-label">
+                    (0 today)
+                  </span>
+                </h2>
+                <p class="card-subtitle">
+                  Add one row per doctor you visited today. Master data will
+                  auto-fill grade &amp; location.
+                </p>
+              </div>
+              <div class="card-header-actions">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  id="btn-add-doctor-visit"
+                >
+                  + Add doctor
+                </button>
+              </div>
+            </header>
+            <div class="card-body">
+              <div id="doctor-visits-list"></div>
+              <p class="form-helper">
+                Products list is synced with the master product list. Use
+                remarks for any key feedback.
+              </p>
+            </div>
+          </section>
+
+          <!-- Missed doctors -->
+          <section class="card">
+            <header class="card-header card-header--with-action">
+              <div>
+                <h2 class="card-title">Missed doctors (optional)</h2>
+                <p class="card-subtitle">
+                  Capture doctors you were scheduled to see but could not, with
+                  a reason.
+                </p>
+              </div>
+              <div class="card-header-actions">
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-sm"
+                  id="btn-add-missed-doctor"
+                >
+                  + Add missed doctor
+                </button>
+              </div>
+            </header>
+            <div class="card-body">
+              <div id="missed-doctors-list"></div>
+              <p class="form-helper">
+                This drives missed-doctor notifications &amp; sprint compliance
+                analytics.
+              </p>
+            </div>
+          </section>
+
+          <!-- Actions -->
+          <section class="sticky-actions">
+            <button class="btn btn-secondary" type="button">Save draft</button>
+            <button class="btn btn-primary" type="button" id="btn-submit-dcr">
+              Submit DCR
+            </button>
+          </section>
+        </section>
+
+        <!-- ===================== -->
+        <!-- 2) Doctor To-Do (Monthly Plan) -->
+        <!-- ===================== -->
+        <section class="view" data-view="todo">
+          <!-- Main monthly to-do table -->
+          <section class="card">
+            <header class="card-header card-header--with-action">
+              <div>
+                <h2 class="card-title">My doctor to-do list (this month)</h2>
+                <p class="card-subtitle">
+                  Each row is a doctor in your monthly plan. “Visits this month”
+                  is updated automatically from DCR.
+                </p>
+              </div>
+              <div class="card-header-actions">
+                <div class="summary-pill-row">
+                  <span class="summary-pill">
+                    Doctors in plan: <strong>32</strong>
+                  </span>
+                  <span class="summary-pill">
+                    Visits done: <strong>18</strong>
+                  </span>
+                  <span class="summary-pill">
+                    Visits remaining: <strong>14</strong>
+                  </span>
+                </div>
+              </div>
+            </header>
+            <div class="card-body">
+              <div class="todo-table-wrapper">
+                <table class="todo-table">
+                  <thead>
+                    <tr>
+                      <th>Doctor</th>
+                      <th>Grade</th>
+                      <th>Territory</th>
+                      <th>Planned freq (per month)</th>
+                      <th>Visits this month</th>
+                      <th>Remaining visits</th>
+                      <th>Last visit</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Sample rows – these will be generated from data in JS -->
+                    <tr class="row-risk">
+                      <td>Dr. A Kumar</td>
+                      <td>
+                        <span class="summary-pill summary-pill--grade">A</span>
+                      </td>
+                      <td>Colombo North</td>
+                      <td>2</td>
+                      <td>0</td>
+                      <td>2</td>
+                      <td>—</td>
+                      <td>
+                        <span class="status-tag status-tag--risk"
+                          >Overdue (&gt; 14 days)</span
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Dr. B Fernando</td>
+                      <td>
+                        <span class="summary-pill summary-pill--grade">A</span>
+                      </td>
+                      <td>Colombo South</td>
+                      <td>2</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>2025-11-06</td>
+                      <td>
+                        <span class="status-tag status-tag--ok">On track</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Dr. C Jayasinghe</td>
+                      <td>
+                        <span class="summary-pill summary-pill--grade">A</span>
+                      </td>
+                      <td>Kandy</td>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>0</td>
+                      <td>2025-11-12</td>
+                      <td>
+                        <span class="status-tag status-tag--ok">Completed</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="form-helper">
+                In production, this table should be auto-generated from the
+                doctor master, planned frequency, and DCR visit data. When you
+                submit a DCR with a visit for a doctor:
+                <br />
+                • “Visits this month” increments<br />
+                • “Remaining visits” updates<br />
+                • Status moves from “Overdue” → “On track” → “Completed”
+              </p>
+            </div>
+          </section>
+        </section>
+
+        <!-- ===================== -->
+        <!-- 2) Chemist Report     -->
+        <!-- ===================== -->
+        <section class="view" data-view="chemist">
+          <!-- Basics -->
+          <section class="card">
+            <header class="card-header">
+              <div>
+                <h2 class="card-title">Chemist Report</h2>
+                <p class="card-subtitle">
+                  Log chemist visits and any out-of-stock issues for products.
+                </p>
+              </div>
+            </header>
+            <div class="card-body">
+              <div class="form-grid-2">
+                <div class="form-field">
+                  <label class="form-label" for="chemist-date">Date</label>
+                  <input id="chemist-date" type="date" class="input-text" />
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="chemist-territory">
+                    Territory / Station
+                  </label>
+                  <select
+                    id="chemist-territory"
+                    class="input-select territory-select"
+                  >
+                    <option>Colombo North</option>
+                    <option>Colombo South</option>
+                    <option>Kandy</option>
+                    <option>Galle</option>
+                    <option>Negombo</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Chemist visits -->
+          <section class="card">
+            <header class="card-header card-header--with-action">
+              <div>
+                <h2 class="card-title">
+                  Chemist visits
+                  <span class="card-title-count" id="chemist-count-label">
+                    (0 today)
+                  </span>
+                </h2>
+                <p class="card-subtitle">
+                  One row per chemist visited today. Add only products that have
+                  stock issues.
+                </p>
+              </div>
+              <div class="card-header-actions">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  id="btn-add-chemist-visit"
+                >
+                  + Add chemist
+                </button>
+              </div>
+            </header>
+            <div class="card-body">
+              <div id="chemist-visits-list"></div>
+              <p class="form-helper">
+                Reps do not need to report products that are in stock – only OOS
+                or low stock.
+              </p>
+            </div>
+          </section>
+
+          <!-- Actions -->
+          <section class="sticky-actions">
+            <button class="btn btn-secondary" type="button">Save draft</button>
+            <button
+              class="btn btn-primary"
+              type="button"
+              id="btn-submit-chemist"
+            >
+              Submit chemist report
+            </button>
+          </section>
+        </section>
+
+        <!-- ===================== -->
+        <!-- 3) Expenses           -->
+        <!-- ===================== -->
+        <section class="view" data-view="expenses">
+          <!-- Basics -->
+          <section class="card">
+            <header class="card-header">
+              <div>
+                <h2 class="card-title">Daily Expenses</h2>
+                <p class="card-subtitle">
+                  Log mileage and any additional expenses for this date.
+                </p>
+              </div>
+            </header>
+            <div class="card-body">
+              <div class="form-grid-2">
+                <div class="form-field">
+                  <label class="form-label" for="expense-date">Date</label>
+                  <input id="expense-date" type="date" class="input-text" />
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="expense-territory">
+                    Territory / Station
+                  </label>
+                  <select
+                    id="expense-territory"
+                    class="input-select territory-select"
+                  >
+                    <option>Colombo North</option>
+                    <option>Colombo South</option>
+                    <option>Kandy</option>
+                    <option>Galle</option>
+                    <option>Negombo</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Mileage -->
+          <section class="card">
+            <header class="card-header">
+              <div>
+                <h2 class="card-title">Mileage</h2>
+                <p class="card-subtitle">
+                  Enter total distance travelled for field work today.
+                </p>
+              </div>
+            </header>
+            <div class="card-body">
+              <div class="form-grid-2">
+                <div class="form-field">
+                  <label class="form-label" for="mileage-km">
+                    Mileage (km)
+                  </label>
+                  <input
+                    id="mileage-km"
+                    type="number"
+                    inputmode="decimal"
+                    min="0"
+                    class="input-text"
+                    placeholder="0"
+                  />
+                  <p class="form-helper">
+                    Numbers only. Mileage will be used for mileage analytics and
+                    later for fuel calculations.
+                  </p>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="fuel-type">
+                    Fuel type (optional)
+                  </label>
+                  <select id="fuel-type" class="input-select">
+                    <option value="">Not specified</option>
+                    <option>Petrol</option>
+                    <option>Diesel</option>
+                    <option>Hybrid / EV</option>
+                  </select>
+                  <p class="form-helper">
+                    Fuel cost isn’t calculated yet – this is just for future
+                    use.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Additional expenses -->
+          <section class="card">
+            <header class="card-header card-header--with-action">
+              <div>
+                <h2 class="card-title">Additional expenses</h2>
+                <p class="card-subtitle">
+                  Add food, tolls, parking, accommodation, etc. if applicable.
+                </p>
+              </div>
+              <div class="card-header-actions">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  id="btn-add-expense-row"
+                >
+                  + Add expense
+                </button>
+              </div>
+            </header>
+            <div class="card-body">
+              <div id="expense-rows"></div>
+
+              <div class="expense-total-row">
+                <span class="expense-total-label">
+                  Total additional expenses
+                </span>
+                <span class="expense-total-value" id="expense-total-value">
+                  LKR 0.00
+                </span>
+              </div>
+              <p class="form-helper">
+                This view is primarily for reps and managers to monitor
+                day-to-day cost; finance rules can be added later.
+              </p>
+            </div>
+          </section>
+
+          <!-- Actions -->
+          <section class="sticky-actions">
+            <button class="btn btn-secondary" type="button">Save draft</button>
+            <button
+              class="btn btn-primary"
+              type="button"
+              id="btn-submit-expenses"
+            >
+              Submit expenses
+            </button>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <!-- Templates (hidden – cloned by JS) -->
+    <div class="templates" aria-hidden="true">
+      <!-- Doctor visit template -->
+      <div
+        id="template-doctor-visit"
+        class="block-template"
+        data-template="doctor-visit"
+      >
+        <div class="visit-row">
+          <div class="visit-row-top">
+            <div class="form-field">
+              <label class="form-label">Doctor</label>
+              <div class="autocomplete">
+                <input
+                  type="text"
+                  class="input-text doctor-search-input"
+                  placeholder="Search doctor by name or ID"
+                />
+                <div class="autocomplete-list"></div>
+              </div>
+              <p class="form-helper">
+                Start typing at least 2 letters to search the master doctor
+                list.
+              </p>
+            </div>
+          </div>
+
+          <div class="form-field form-field--compact">
+            <label class="form-label">Doctor details</label>
+            <div class="summary-pill-row">
+              <span class="summary-pill summary-pill--grade" data-field="grade">
+                Grade: —
+              </span>
+              <span class="summary-pill" data-field="location">
+                Location: —
+              </span>
+              <span class="summary-pill" data-field="status"> Status: — </span>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label class="form-label">Products promoted</label>
+
+              <!-- Static checkbox list, no JS needed -->
+              <div class="product-checkbox-list visit-products">
+                <label class="product-checkbox-item">
+                  <input
+                    type="checkbox"
+                    class="product-checkbox-input"
+                    value="Prod A"
+                  />
+                  <span class="product-checkbox-label">Prod A</span>
+                </label>
+
+                <label class="product-checkbox-item">
+                  <input
+                    type="checkbox"
+                    class="product-checkbox-input"
+                    value="Prod B"
+                  />
+                  <span class="product-checkbox-label">Prod B</span>
+                </label>
+
+                <label class="product-checkbox-item">
+                  <input
+                    type="checkbox"
+                    class="product-checkbox-input"
+                    value="Prod C"
+                  />
+                  <span class="product-checkbox-label">Prod C</span>
+                </label>
+
+                <label class="product-checkbox-item">
+                  <input
+                    type="checkbox"
+                    class="product-checkbox-input"
+                    value="Prod F"
+                  />
+                  <span class="product-checkbox-label">Prod F</span>
+                </label>
+
+                <label class="product-checkbox-item">
+                  <input
+                    type="checkbox"
+                    class="product-checkbox-input"
+                    value="Prod H"
+                  />
+                  <span class="product-checkbox-label">Prod H</span>
+                </label>
+              </div>
+
+              <p class="form-helper">
+                Tick one or more products detailed in this visit.
+              </p>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">Remark / feedback</label>
+              <textarea
+                class="input-textarea visit-remark"
+                rows="2"
+                placeholder="Key feedback, objections, commitments…"
+              ></textarea>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="link-button link-button--danger visit-remove"
+          >
+            Remove doctor
+          </button>
+
+          <hr class="row-divider" />
+        </div>
+      </div>
+
+      <!-- Missed doctor template -->
+      <div
+        id="template-missed-doctor"
+        class="block-template"
+        data-template="missed-doctor"
+      >
+        <div class="missed-row">
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label class="form-label">Doctor</label>
+              <div class="autocomplete">
+                <input
+                  type="text"
+                  class="input-text doctor-search-input"
+                  placeholder="Search doctor by name or ID"
+                />
+                <div class="autocomplete-list"></div>
+              </div>
+            </div>
+
+            <div class="form-field form-field--compact">
+              <label class="form-label">Details</label>
+              <div class="summary-pill-row">
+                <span
+                  class="summary-pill summary-pill--grade"
+                  data-field="grade"
+                >
+                  Grade: —
+                </span>
+                <span class="summary-pill" data-field="location">
+                  Location: —
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label class="form-label">Reason</label>
+              <select class="input-select missed-reason">
+                <option>Doctor unavailable</option>
+                <option>Clinic closed</option>
+                <option>Rep did not go</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">Optional note</label>
+              <textarea
+                class="input-textarea missed-note"
+                rows="2"
+                placeholder="Any extra explanation…"
+              ></textarea>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="link-button link-button--danger missed-remove"
+          >
+            Remove row
+          </button>
+
+          <hr class="row-divider" />
+        </div>
+      </div>
+
+      <!-- Chemist visit template -->
+      <div
+        id="template-chemist-visit"
+        class="block-template"
+        data-template="chemist-visit"
+      >
+        <div class="chemist-row">
+          <div class="form-field">
+            <label class="form-label">Chemist</label>
+            <div class="autocomplete">
+              <input
+                type="text"
+                class="input-text chemist-search-input"
+                placeholder="Search chemist by name"
+              />
+              <div class="autocomplete-list"></div>
+            </div>
+            <p class="form-helper">
+              Master chemist data will auto-fill location and channel.
+            </p>
+          </div>
+
+          <div class="form-field form-field--compact">
+            <label class="form-label">Chemist details</label>
+            <div class="summary-pill-row">
+              <span class="summary-pill" data-field="location">
+                Location: —
+              </span>
+              <span class="summary-pill" data-field="channel">
+                Channel: —
+              </span>
+            </div>
+          </div>
+
+          <div class="form-field chemist-products-header">
+            <div class="chemist-products-header-top">
+              <label class="form-label">Out-of-stock products</label>
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm chemist-add-product"
+              >
+                + Add product
+              </button>
+            </div>
+            <p class="form-helper">
+              Add only products that are Out of stock or Low stock in this
+              chemist.
+            </p>
+          </div>
+
+          <div class="chemist-product-rows"></div>
+
+          <div class="form-field">
+            <label class="form-label">
+              Notes / new doctors in area (optional)
+            </label>
+            <textarea
+              class="input-textarea chemist-remark"
+              rows="2"
+              placeholder="E.g. new doctors nearby, competition, pricing issues…"
+            ></textarea>
+          </div>
+
+          <button
+            type="button"
+            class="link-button link-button--danger chemist-remove"
+          >
+            Remove chemist
+          </button>
+
+          <hr class="row-divider" />
+        </div>
+      </div>
+
+      <!-- Chemist product row template -->
+      <div
+        id="template-chemist-product-row"
+        class="block-template"
+        data-template="chemist-product-row"
+      >
+        <div class="chemist-product-row">
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label class="form-label">Product</label>
+              <select class="input-select chemist-product-select">
+                <!-- options injected from masterProducts -->
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="form-label">Issue status</label>
+              <select class="input-select chemist-product-status">
+                <option>Out of stock</option>
+                <option>Low stock / Nearly OOS</option>
+              </select>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="link-button link-button--danger chemist-product-remove"
+          >
+            Remove product
+          </button>
+          <hr class="row-divider row-divider--light" />
+        </div>
+      </div>
+
+      <!-- Expense row template -->
+      <div
+        id="template-expense-row"
+        class="block-template"
+        data-template="expense-row"
+      >
+        <div class="expense-row">
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label class="form-label">Expense label</label>
+              <input
+                type="text"
+                class="input-text expense-label"
+                placeholder="e.g. Lunch, Toll, Parking"
+              />
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">Amount (LKR)</label>
+              <input
+                type="number"
+                inputmode="decimal"
+                min="0"
+                class="input-text expense-amount"
+                placeholder="0.00"
+              />
+            </div>
+          </div>
+          <button
+            type="button"
+            class="link-button link-button--danger expense-remove"
+          >
+            Remove expense
+          </button>
+          <hr class="row-divider" />
+        </div>
+      </div>
+    </div>
+
+    <script src="js/rep-submission.js"></script>
+  </body>
+</html>

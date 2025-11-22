@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rep Detail – Analytics UI</title>
+    <!-- 👇 this is the important part -->
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <main class="dashboard-main">
+      <!-- views/rep-detail.html -->
+      <section class="dashboard-view is-active" data-view="rep-detail">
+        <!-- Top filters -->
+        <section class="filter-bar">
+          <div class="filter-group filter-group--search">
+            <div class="filter-label">Rep</div>
+            <div class="filter-input filter-input--search">
+              <input
+                type="text"
+                placeholder="Search rep by name or ID…"
+                value="Rep 01 – H. Jayasuriya"
+              />
+            </div>
+          </div>
+
+            <div class="filter-group">
+          <div class="filter-label">Start Date</div>
+          <div class=>
+              <input id="dcr-date" type="date" class="input-text" />
+            
+          </div>
+        </div>
+
+         <div class="filter-group">
+          <div class="filter-label">End Date</div>
+          <div class=>
+              <input id="dcr-date" type="date" class="input-text" />
+            
+          </div>
+        </div>
+
+          <div class="filter-group">
+            <div class="filter-label">Territory</div>
+            <div class="filter-input">
+              <span>Colombo North</span>
+              <span class="filter-chevron">▾</span>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <div class="filter-label">Grade focus</div>
+            <div class="filter-input">
+              <span>A-grade only</span>
+              <span class="filter-chevron">▾</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Rep KPIs -->
+        <section class="kpi-row">
+          <article class="kpi-card">
+            <div class="kpi-label">Rep</div>
+            <div class="kpi-value">Rep 01</div>
+            <div class="kpi-delta">
+              <span>Colombo North • FM 01 – Jayasinghe</span>
+            </div>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-label">Total Visits (Period)</div>
+            <div class="kpi-value">180</div>
+            <div class="kpi-delta delta-success">
+              <span class="delta-icon">▲</span>
+              <span>+8% vs last month</span>
+            </div>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-label">A-grade Target Achievement</div>
+            <div class="kpi-value">120%</div>
+            <div class="kpi-delta delta-success">
+              <span class="delta-icon">▲</span>
+              <span>Above target</span>
+            </div>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-label">Total Mileage</div>
+            <div class="kpi-value">420 km</div>
+            <div class="kpi-delta">
+              <span>Within expected range</span>
+            </div>
+          </article>
+        </section>
+
+        <!-- Layout: visits trend + product mix + key doctors + missed A-grade -->
+        <section class="content-grid">
+          <!-- Line chart: doctor visits over time -->
+          <article class="chart-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Doctor Visits Over Time</div>
+                <div class="card-subtitle">
+                  Weekly total doctor visits for this rep
+                </div>
+              </div>
+            </div>
+
+            <div class="line-chart">
+              <svg viewBox="0 0 300 160" preserveAspectRatio="none">
+                <line class="line-chart-axis" x1="20" y1="10" x2="20" y2="140" />
+                <line class="line-chart-axis" x1="20" y1="140" x2="290" y2="140" />
+                <polyline
+                  class="line-chart-line-visits"
+                  points="20,125 80,110 140,95 200,100 260,85"
+                ></polyline>
+              </svg>
+              <div class="line-chart-legend">
+                <span class="legend-item">
+                  <span class="legend-dot legend-dot--visits"></span>
+                  Doctor visits
+                </span>
+              </div>
+            </div>
+            <div class="chart-caption">
+              Straight reuse of your existing line chart look, just rep-focused.
+            </div>
+          </article>
+
+          <!-- Product mix -->
+          <article class="chart-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Product Mix (This Rep)</div>
+                <div class="card-subtitle">
+                  Share of visits including each product
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-bars chart-bars-horizontal">
+              <div class="chart-bar-horizontal-group">
+                <div
+                  class="chart-bar-horizontal chart-bar-horizontal--good"
+                  style="width: 70%"
+                >
+                  Prod A – 40% of calls
+                </div>
+              </div>
+              <div class="chart-bar-horizontal-group">
+                <div
+                  class="chart-bar-horizontal chart-bar-horizontal--ok"
+                  style="width: 45%"
+                >
+                  Prod B – 25% of calls
+                </div>
+              </div>
+              <div class="chart-bar-horizontal-group">
+                <div
+                  class="chart-bar-horizontal chart-bar-horizontal--warn"
+                  style="width: 30%"
+                >
+                  Prod C – 15% of calls
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Key doctors for this rep -->
+          <article class="table-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Key Doctors Managed by This Rep</div>
+                <div class="card-subtitle">
+                  High-value doctors and visit depth in the selected period
+                </div>
+              </div>
+            </div>
+
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Doctor</th>
+                    <th>Grade</th>
+                    <th>Territory</th>
+                    <th>Visits (Period)</th>
+                    <th>Last Visit</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Dr. A Kumar</td>
+                    <td><span class="grade-badge">A</span></td>
+                    <td>Colombo North</td>
+                    <td>6</td>
+                    <td>2025-11-14</td>
+                    <td>
+                      <span class="status-tag status-tag--ok">On track</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Dr. E Pathirana</td>
+                    <td><span class="grade-badge">A</span></td>
+                    <td>Negombo</td>
+                    <td>2</td>
+                    <td>2025-10-30</td>
+                    <td>
+                      <span class="status-tag status-tag--risk">At risk</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Dr. D Nuwan</td>
+                    <td><span class="grade-badge">C</span></td>
+                    <td>Galle</td>
+                    <td>1</td>
+                    <td>2025-10-15</td>
+                    <td>
+                      <span class="status-tag status-tag--ok">Low priority</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <!-- Missed A-grade doctors list -->
+          <article class="table-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Missed A-grade Doctors (This Rep)</div>
+                <div class="card-subtitle">
+                  A-grade doctors assigned to this rep with low or no recent visits
+                </div>
+              </div>
+            </div>
+
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Doctor</th>
+                    <th>Territory</th>
+                    <th>Last Visit</th>
+                    <th>Days Since</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="row-risk">
+                    <td>Dr. G Perera</td>
+                    <td>Colombo North</td>
+                    <td>—</td>
+                    <td>&gt; 30</td>
+                    <td>
+                      <span class="status-tag status-tag--risk">Missed</span>
+                    </td>
+                  </tr>
+                  <tr class="row-risk">
+                    <td>Dr. H Jayawardena</td>
+                    <td>Galle</td>
+                    <td>2025-10-01</td>
+                    <td>40</td>
+                    <td>
+                      <span class="status-tag status-tag--risk">Needs visit</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      </section>
+    </main>
+  </body>
+</html>
+

@@ -1,0 +1,834 @@
+          <button class="side-nav-item" data-view="sprint-compliance">
+            <span class="side-nav-dot"></span>
+            <span class="side-nav-label">Manager – Sprint Compliance</span>
+          </button>
+
+        <button class="side-nav-item" data-view="product-mix">
+            <span class="side-nav-dot"></span>
+            <span class="side-nav-label">HO – Product Promotion Mix</span>
+          </button>
+
+        <button class="side-nav-item" data-view="new-doctor-activation">
+            <span class="side-nav-dot"></span>
+            <span class="side-nav-label">HO – New Doctor Activation</span>
+          </button>
+
+ <!-- ===================== -->
+          <!-- 2) Sprint Compliance  -->
+          <!-- ===================== -->
+          <section class="dashboard-view" data-view="sprint-compliance">
+            <section class="filter-bar">
+              <div class="filter-group">
+                <div class="filter-label">Sprint</div>
+                <div class="filter-input">
+                  <span>Current sprint</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Territory / Station</div>
+                <div class="filter-input">
+                  <span>All territories</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Field Manager</div>
+                <div class="filter-input">
+                  <span>All managers</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Rep</div>
+                <div class="filter-input">
+                  <span>All reps</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Grade</div>
+                <div class="filter-input">
+                  <span>A + B + C</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Reason</div>
+                <div class="filter-input">
+                  <span>All reasons</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="kpi-row">
+              <article class="kpi-card">
+                <div class="kpi-label">Sprint Coverage (All Grades)</div>
+                <div class="kpi-value">91%</div>
+                <div class="kpi-delta delta-success">
+                  <span class="delta-icon">▲</span>
+                  <span>+3% vs last sprint</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Sprint Coverage (A-Grade)</div>
+                <div class="kpi-value">88%</div>
+                <div class="kpi-delta delta-warning">
+                  <span class="delta-icon">●</span>
+                  <span>Target: 100%</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Missed A-Grade Doctors</div>
+                <div class="kpi-value">6</div>
+                <div class="kpi-delta delta-error">
+                  <span class="delta-icon">▼</span>
+                  <span>4 last sprint</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Avg Visits/Rep (Sprint)</div>
+                <div class="kpi-value">74</div>
+                <div class="kpi-delta delta-success">
+                  <span class="delta-icon">▲</span>
+                  <span>+5 vs last sprint</span>
+                </div>
+              </article>
+            </section>
+
+            <section class="content-grid">
+              <!-- Chart: Compliance by Rep -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Sprint Compliance by Rep</div>
+                    <div class="card-subtitle">
+                      % of assigned doctors visited at least once this sprint
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-bars chart-bars-horizontal">
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--good"
+                      style="width: 96%"
+                    >
+                      Rep 01 – 96%
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--ok"
+                      style="width: 88%"
+                    >
+                      Rep 02 – 88%
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--warn"
+                      style="width: 78%"
+                    >
+                      Rep 03 – 78%
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--bad"
+                      style="width: 64%"
+                    >
+                      Rep 04 – 64%
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Chart: Missed by Reason -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Missed Doctors by Reason</div>
+                    <div class="card-subtitle">
+                      Aggregated from DCR "Doctors missed / Reason"
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-bars">
+                  <div class="chart-bar-group">
+                    <div
+                      class="chart-bar chart-bar--muted"
+                      style="height: 120px"
+                    >
+                      12
+                    </div>
+                    <div class="chart-bar-label">Doctor unavailable</div>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div
+                      class="chart-bar chart-bar--muted"
+                      style="height: 80px"
+                    >
+                      7
+                    </div>
+                    <div class="chart-bar-label">Rep did not go</div>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div
+                      class="chart-bar chart-bar--muted"
+                      style="height: 60px"
+                    >
+                      5
+                    </div>
+                    <div class="chart-bar-label">Clinic closed</div>
+                  </div>
+                </div>
+                <div class="chart-caption">
+                  Use this to distinguish behavioral vs external constraints.
+                </div>
+              </article>
+
+              <!-- Table: Missed Doctors -->
+              <article class="table-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Missed Doctors – Detail</div>
+                    <div class="card-subtitle">
+                      A-grade doctors are highlighted in red
+                    </div>
+                  </div>
+                  <div class="card-header-right">
+                    <span class="muted">Sample sprint view</span>
+                  </div>
+                </div>
+
+                <div class="table-wrapper">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Doctor</th>
+                        <th>Grade</th>
+                        <th>Territory</th>
+                        <th>Assigned Rep</th>
+                        <th>Reason</th>
+                        <th>Last Visit</th>
+                        <th>Days Since</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="row-risk">
+                        <td>Dr. A Kumar</td>
+                        <td><span class="grade-badge">A</span></td>
+                        <td>Colombo North</td>
+                        <td>Rep 03</td>
+                        <td>Rep did not go</td>
+                        <td>—</td>
+                        <td>16</td>
+                      </tr>
+                      <tr>
+                        <td>Dr. B Fernando</td>
+                        <td><span class="grade-badge">B</span></td>
+                        <td>Colombo South</td>
+                        <td>Rep 05</td>
+                        <td>Doctor unavailable</td>
+                        <td>2025-11-03</td>
+                        <td>10</td>
+                      </tr>
+                      <tr class="row-risk">
+                        <td>Dr. C Jayasinghe</td>
+                        <td><span class="grade-badge">A</span></td>
+                        <td>Kandy</td>
+                        <td>Rep 02</td>
+                        <td>Rep did not go</td>
+                        <td>—</td>
+                        <td>18</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+            </section>
+          </section>
+
+ <!-- ===================== -->
+          <!-- 5) Product Mix        -->
+          <!-- ===================== -->
+          <section class="dashboard-view" data-view="product-mix">
+            <section class="filter-bar">
+              <div class="filter-group">
+                <div class="filter-label">Time period</div>
+                <div class="filter-input">
+                  <span>This month</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Level</div>
+                <div class="filter-input">
+                  <span>By rep</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Doctor grade</div>
+                <div class="filter-input">
+                  <span>All doctors</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <!-- Product filter -->
+              <div class="filter-group">
+                <div class="filter-label">Product</div>
+                <div class="filter-input">
+                  <span>All products</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="kpi-row">
+              <article class="kpi-card">
+                <div class="kpi-label">Most Promoted Product</div>
+                <div class="kpi-value">Prod A</div>
+                <div class="kpi-delta delta-success">
+                  <span class="delta-icon">▲</span>
+                  <span>32% of all calls</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Least Promoted Product</div>
+                <div class="kpi-value">Prod H</div>
+                <div class="kpi-delta delta-warning">
+                  <span class="delta-icon">●</span>
+                  <span>3% of all calls</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Products &lt; 5% Share</div>
+                <div class="kpi-value">3</div>
+                <div class="kpi-delta delta-warning">
+                  <span class="delta-icon">●</span>
+                  <span>Need attention</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Avg Products per Visit</div>
+                <div class="kpi-value">2.3</div>
+                <div class="kpi-delta delta-success">
+                  <span class="delta-icon">▲</span>
+                  <span>+0.2 vs last month</span>
+                </div>
+              </article>
+            </section>
+
+            <section class="content-grid">
+              <!-- 100% stacked bars -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Product Mix by Rep</div>
+                    <div class="card-subtitle">
+                      Each bar is 100% of that rep's detailing calls split by
+                      product
+                    </div>
+                  </div>
+                </div>
+                <div class="stacked-bars">
+                  <div class="stacked-row">
+                    <div class="stacked-label">Rep 01</div>
+                    <div class="stacked-bar">
+                      <div
+                        class="stacked-segment stacked-segment--p1"
+                        style="width: 40%"
+                      >
+                        A
+                      </div>
+                      <div
+                        class="stacked-segment stacked-segment--p2"
+                        style="width: 30%"
+                      >
+                        B
+                      </div>
+                      <div
+                        class="stacked-segment stacked-segment--p3"
+                        style="width: 20%"
+                      >
+                        C
+                      </div>
+                      <div
+                        class="stacked-segment stacked-segment--p4"
+                        style="width: 10%"
+                      >
+                        Other
+                      </div>
+                    </div>
+                  </div>
+                  <div class="stacked-row">
+                    <div class="stacked-label">Rep 02</div>
+                    <div class="stacked-bar">
+                      <div
+                        class="stacked-segment stacked-segment--p1"
+                        style="width: 25%"
+                      >
+                        A
+                      </div>
+                      <div
+                        class="stacked-segment stacked-segment--p2"
+                        style="width: 35%"
+                      >
+                        B
+                      </div>
+                      <div
+                        class="stacked-segment stacked-segment--p3"
+                        style="width: 25%"
+                      >
+                        C
+                      </div>
+                      <div
+                        class="stacked-segment stacked-segment--p4"
+                        style="width: 15%"
+                      >
+                        Other
+                      </div>
+                    </div>
+                  </div>
+                  <div class="stacked-row">
+                    <div class="stacked-label">Rep 03</div>
+                    <div class="stacked-bar">
+                      <div
+                        class="stacked-segment stacked-segment--p1"
+                        style="width: 55%"
+                      >
+                        A
+                      </div>
+                      <div
+                        class="stacked-segment stacked-segment--p2"
+                        style="width: 20%"
+                      >
+                        B
+                      </div>
+                      <div
+                        class="stacked-segment stacked-segment--p3"
+                        style="width: 15%"
+                      >
+                        C
+                      </div>
+                      <div
+                        class="stacked-segment stacked-segment--p4"
+                        style="width: 10%"
+                      >
+                        Other
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- SOV per product -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Product Share of Voice</div>
+                    <div class="card-subtitle">
+                      % of all doctor visits including each product
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-bars chart-bars-horizontal">
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--good"
+                      style="width: 80%"
+                    >
+                      Prod A – 32%
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--ok"
+                      style="width: 62%"
+                    >
+                      Prod B – 25%
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--ok"
+                      style="width: 48%"
+                    >
+                      Prod C – 18%
+                    </div>
+                  </div>
+                  <div class="chart-bar-horizontal-group">
+                    <div
+                      class="chart-bar-horizontal chart-bar-horizontal--warn"
+                      style="width: 18%"
+                    >
+                      Prod H – 3%
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Table -->
+              <article class="table-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Product SOV – Detail</div>
+                    <div class="card-subtitle">
+                      Share of voice (SOV) and A-grade share per product
+                    </div>
+                  </div>
+                </div>
+                <div class="table-wrapper">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Product</th>
+                        <th>Total Detailing Calls</th>
+                        <th>Share of Voice %</th>
+                        <th>A-grade Visit Share %</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Prod A</td>
+                        <td>1,460</td>
+                        <td>32%</td>
+                        <td>38%</td>
+                      </tr>
+                      <tr>
+                        <td>Prod B</td>
+                        <td>1,120</td>
+                        <td>25%</td>
+                        <td>29%</td>
+                      </tr>
+                      <tr>
+                        <td>Prod C</td>
+                        <td>820</td>
+                        <td>18%</td>
+                        <td>21%</td>
+                      </tr>
+                      <tr>
+                        <td>Prod H</td>
+                        <td>150</td>
+                        <td>3%</td>
+                        <td>4%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+            </section>
+          </section>
+
+
+          <!-- ===================== -->
+          <!-- 7) New Doctor Activation -->
+          <!-- ===================== -->
+          <section class="dashboard-view" data-view="new-doctor-activation">
+            <section class="filter-bar">
+              <div class="filter-group">
+                <div class="filter-label">New doctor period</div>
+                <div class="filter-input">
+                  <span>Last 60 days</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Territory</div>
+                <div class="filter-input">
+                  <span>All territories</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Field Manager</div>
+                <div class="filter-input">
+                  <span>All managers</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Rep</div>
+                <div class="filter-input">
+                  <span>All reps</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Grade</div>
+                <div class="filter-input">
+                  <span>All grades</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-label">Speciality</div>
+                <div class="filter-input">
+                  <span>All specialities</span>
+                  <span class="filter-chevron">▾</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="kpi-row">
+              <article class="kpi-card">
+                <div class="kpi-label">New Doctors Added</div>
+                <div class="kpi-value">120</div>
+                <div class="kpi-delta delta-success">
+                  <span class="delta-icon">▲</span>
+                  <span>+18 vs previous period</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">New Doctors Not Visited</div>
+                <div class="kpi-value">24</div>
+                <div class="kpi-delta delta-warning">
+                  <span class="delta-icon">●</span>
+                  <span>20% to follow up</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">New A-grade Not Visited</div>
+                <div class="kpi-value">5</div>
+                <div class="kpi-delta delta-error">
+                  <span class="delta-icon">▼</span>
+                  <span>Critical</span>
+                </div>
+              </article>
+              <article class="kpi-card">
+                <div class="kpi-label">Avg Days to First Visit</div>
+                <div class="kpi-value">9.4</div>
+                <div class="kpi-delta delta-success">
+                  <span class="delta-icon">▲</span>
+                  <span>Down from 12.1 days</span>
+                </div>
+              </article>
+            </section>
+
+            <section class="content-grid">
+              <!-- Funnel -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">New Doctor Activation Funnel</div>
+                    <div class="card-subtitle">
+                      From creation to 2+ visits in the first period
+                    </div>
+                  </div>
+                </div>
+                <div class="funnel">
+                  <button
+                    class="funnel-step is-active"
+                    data-stage="new"
+                    data-target-table="#table-new-doctor-activation"
+                  >
+                    New Doctors (120)
+                  </button>
+                  <button
+                    class="funnel-step"
+                    data-stage="visited-once"
+                    data-target-table="#table-new-doctor-activation"
+                  >
+                    Visited Once (68)
+                  </button>
+                  <button
+                    class="funnel-step"
+                    data-stage="visited-multi"
+                    data-target-table="#table-new-doctor-activation"
+                  >
+                    Visited 2+ Times (28)
+                  </button>
+                </div>
+                <div class="chart-caption">
+                  Click stages to filter the detail table below.
+                </div>
+              </article>
+
+              <!-- Segment chart -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">
+                      New Doctors by Grade &amp; Visit Status
+                    </div>
+                    <div class="card-subtitle">
+                      A, B, C grades segmented into Not visited / 1 visit / 2+
+                      visits
+                    </div>
+                  </div>
+                </div>
+                <div class="stacked-bars">
+                  <div class="stacked-row">
+                    <div class="stacked-label">A</div>
+                    <div class="stacked-bar">
+                      <div
+                        class="stacked-segment stacked-segment--warn"
+                        style="width: 18%"
+                      >
+                        Not
+                      </div>
+                      <div
+                        class="stacked-segment stacked-segment--p2"
+                        style="width: 42%"
+                      >
+                        1x
+                      </div>
+                      <div
+                        class="stacked-segment stacked-segment--p3"
+                        style="width: 40%"
+                      >
+                        2+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="stacked-row">
+                    <div class="stacked-label">B</div>
+                    <div class="stacked-bar">
+                      <div
+                        class="stacked-segment stacked-segment--warn"
+                        style="width: 22%"
+                      >
+                        Not
+                      </div>
+                      <div
+                        class="stacked-segment stacked-segment--p2"
+                        style="width: 46%"
+                      >
+                        1x
+                      </div>
+                      <div
+                        class="stacked-segment stacked-segment--p3"
+                        style="width: 32%"
+                      >
+                        2+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="stacked-row">
+                    <div class="stacked-label">C</div>
+                    <div class="stacked-bar">
+                      <div
+                        class="stacked-segment stacked-segment--warn"
+                        style="width: 28%"
+                      >
+                        Not
+                      </div>
+                      <div
+                        class="stacked-segment stacked-segment--p2"
+                        style="width: 40%"
+                      >
+                        1x
+                      </div>
+                      <div
+                        class="stacked-segment stacked-segment--p3"
+                        style="width: 32%"
+                      >
+                        2+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Table -->
+              <article class="table-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">New Doctor Activation – Detail</div>
+                    <div class="card-subtitle">
+                      Filtered by activation stage (New / Visited Once / 2+
+                      Visits)
+                    </div>
+                  </div>
+                </div>
+
+                <div class="table-wrapper">
+                  <table id="table-new-doctor-activation">
+                    <thead>
+                      <tr>
+                        <th>Doctor</th>
+                        <th>Grade</th>
+                        <th>Speciality</th>
+                        <th>Territory</th>
+                        <th>Assigned Rep</th>
+                        <th>Created</th>
+                        <th>First Visit</th>
+                        <th># Visits</th>
+                        <th>Stage</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr data-stage="new">
+                        <td>Dr. New A1</td>
+                        <td><span class="grade-badge">A</span></td>
+                        <td>Cardiology</td>
+                        <td>Colombo North</td>
+                        <td>Rep 03</td>
+                        <td>2025-10-28</td>
+                        <td>—</td>
+                        <td>0</td>
+                        <td>Not Visited</td>
+                      </tr>
+                      <tr data-stage="visited-once">
+                        <td>Dr. New B1</td>
+                        <td><span class="grade-badge">B</span></td>
+                        <td>GP</td>
+                        <td>Kandy</td>
+                        <td>Rep 02</td>
+                        <td>2025-10-20</td>
+                        <td>2025-11-01</td>
+                        <td>1</td>
+                        <td>Visited Once</td>
+                      </tr>
+                      <tr data-stage="visited-multi">
+                        <td>Dr. New A2</td>
+                        <td><span class="grade-badge">A</span></td>
+                        <td>Neurology</td>
+                        <td>Galle</td>
+                        <td>Rep 01</td>
+                        <td>2025-10-10</td>
+                        <td>2025-10-15</td>
+                        <td>3</td>
+                        <td>2+ Visits</td>
+                      </tr>
+                      <tr data-stage="new">
+                        <td>Dr. New C1</td>
+                        <td><span class="grade-badge">C</span></td>
+                        <td>GP</td>
+                        <td>Negombo</td>
+                        <td>Rep 07</td>
+                        <td>2025-11-05</td>
+                        <td>—</td>
+                        <td>0</td>
+                        <td>Not Visited</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+            </section>
+          </section>
+
+
+              <!-- Scatter mock -->
+              <article class="chart-card">
+                <div class="card-header">
+                  <div>
+                    <div class="card-title">Unique Doctors vs Total Visits</div>
+                    <div class="card-subtitle">
+                      Each dot represents a rep (example positioning)
+                    </div>
+                  </div>
+                </div>
+                <div class="scatter-mock">
+                  <div class="scatter-dot scatter-dot--primary"></div>
+                  <div class="scatter-dot scatter-dot--secondary"></div>
+                  <div class="scatter-dot scatter-dot--tertiary"></div>
+                  <div class="scatter-axes-label">
+                    <span>Unique doctors ↑</span>
+                    <span>Total visits →</span>
+                  </div>
+                </div>
+              </article>

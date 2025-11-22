@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chemist Detail – Analytics UI</title>
+    <!-- 👇 this is the important part -->
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <main class="dashboard-main">
+      <!-- views/chemist-detail.html -->
+      <section class="dashboard-view is-active" data-view="chemist-detail">
+        <!-- Top filters -->
+        <section class="filter-bar">
+          <div class="filter-group filter-group--search">
+            <div class="filter-label">Chemist</div>
+            <div class="filter-input filter-input--search">
+              <input
+                type="text"
+                placeholder="Search chemist by name or territory…"
+                value="HealthPlus Pharmacy – Colombo North"
+              />
+            </div>
+          </div>
+
+            <div class="filter-group">
+          <div class="filter-label">Start Date</div>
+          <div class=>
+              <input id="dcr-date" type="date" class="input-text" />
+            
+          </div>
+        </div>
+
+         <div class="filter-group">
+          <div class="filter-label">End Date</div>
+          <div class=>
+              <input id="dcr-date" type="date" class="input-text" />
+            
+          </div>
+        </div>
+
+          <div class="filter-group">
+            <div class="filter-label">Product</div>
+            <div class="filter-input">
+              <span>All products</span>
+              <span class="filter-chevron">▾</span>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <div class="filter-label">Rep</div>
+            <div class="filter-input">
+              <span>All reps</span>
+              <span class="filter-chevron">▾</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- KPIs -->
+        <section class="kpi-row">
+          <article class="kpi-card">
+            <div class="kpi-label">Chemist</div>
+            <div class="kpi-value">HealthPlus Pharmacy</div>
+            <div class="kpi-delta">
+              <span>Colombo North • Retail</span>
+            </div>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-label">Chemist Visits (60 days)</div>
+            <div class="kpi-value">9</div>
+            <div class="kpi-delta">
+              <span>All reps</span>
+            </div>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-label">OOS Events (60 days)</div>
+            <div class="kpi-value">5</div>
+            <div class="kpi-delta delta-error">
+              <span class="delta-icon">▼</span>
+              <span>Chronic OOS risk</span>
+            </div>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-label">Last OOS Date</div>
+            <div class="kpi-value">2025-11-10</div>
+            <div class="kpi-delta">
+              <span>Prod C</span>
+            </div>
+          </article>
+        </section>
+
+        <!-- Layout -->
+        <section class="content-grid">
+          <!-- Chemist snapshot -->
+          <article class="chart-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Chemist Profile</div>
+                <div class="card-subtitle">Basic information for this outlet</div>
+              </div>
+            </div>
+
+            <div class="card-subtitle"><strong>Territory:</strong> Colombo North</div>
+            <div class="card-subtitle"><strong>Channel:</strong> Retail</div>
+            <div class="card-subtitle">
+              <strong>Status:</strong>
+              <span class="status-tag status-tag--ok">Active</span>
+            </div>
+            <div class="card-subtitle">
+              <strong>Recent OOS products:</strong>
+              <span class="tag">Prod C</span>
+              <span class="tag">Prod A</span>
+            </div>
+          </article>
+
+          <!-- Line chart: visits over time -->
+          <article class="chart-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Visits to This Chemist Over Time</div>
+                <div class="card-subtitle">Weekly chemist visit trend (all reps)</div>
+              </div>
+            </div>
+
+            <div class="line-chart">
+              <svg viewBox="0 0 300 160" preserveAspectRatio="none">
+                <line class="line-chart-axis" x1="20" y1="10" x2="20" y2="140" />
+                <line class="line-chart-axis" x1="20" y1="140" x2="290" y2="140" />
+                <polyline
+                  class="line-chart-line-mileage"
+                  points="20,130 80,120 140,100 200,90 260,110"
+                ></polyline>
+              </svg>
+              <div class="line-chart-legend">
+                <span class="legend-item">
+                  <span class="legend-dot legend-dot--mileage"></span>
+                  Chemist visits
+                </span>
+              </div>
+            </div>
+            <div class="chart-caption">
+              Helps see whether coverage of a problematic chemist is consistent.
+            </div>
+          </article>
+
+          <!-- OOS history -->
+          <article class="table-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Stock-Out History – This Chemist</div>
+                <div class="card-subtitle">
+                  OOS events by product at HealthPlus Pharmacy
+                </div>
+              </div>
+            </div>
+
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Rep</th>
+                    <th>Remark</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="row-risk">
+                    <td>2025-11-10</td>
+                    <td>Prod C</td>
+                    <td>Rep 03 – S. Perera</td>
+                    <td>OOS for 2nd consecutive visit</td>
+                  </tr>
+                  <tr class="row-risk">
+                    <td>2025-11-02</td>
+                    <td>Prod A</td>
+                    <td>Rep 03 – S. Perera</td>
+                    <td>No stock despite previous order</td>
+                  </tr>
+                  <tr>
+                    <td>2025-10-20</td>
+                    <td>Prod C</td>
+                    <td>Rep 01 – H. Jayasuriya</td>
+                    <td>Low stock warning</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <!-- Visit / note log -->
+          <article class="table-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Recent Visits & Notes – This Chemist</div>
+                <div class="card-subtitle">
+                  Combines visit log and qualitative notes
+                </div>
+              </div>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Rep</th>
+                    <th>Visit Type</th>
+                    <th>Products Detailed</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2025-11-13</td>
+                    <td>Rep 03 – S. Perera</td>
+                    <td>Chemist</td>
+                    <td>Prod C</td>
+                    <td>Discussed replenishment, reminded on display</td>
+                  </tr>
+                  <tr>
+                    <td>2025-11-05</td>
+                    <td>Rep 01 – H. Jayasuriya</td>
+                    <td>Chemist</td>
+                    <td>Prod A</td>
+                    <td>Explained promo scheme for month</td>
+                  </tr>
+                  <tr>
+                    <td>2025-10-27</td>
+                    <td>Rep 03 – S. Perera</td>
+                    <td>Chemist</td>
+                    <td>Prod A, Prod C</td>
+                    <td>Agreed to monitor OOS more closely</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      </section>
+    </main>
+  </body>
+</html>
+
