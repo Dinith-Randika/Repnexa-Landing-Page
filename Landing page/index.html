@@ -1437,9 +1437,9 @@
             </p>
 
             <div class="demo-links">
-              <a href="#" class="demo-link">Company Dashboard</a>
-              <a href="#" class="demo-link">Medical Rep View</a>
-              <a href="#" class="demo-link">Master List Manager</a>
+              <a href="#" class="https://repnexa.com/repnexa-dashboard-V2/Index">Company Dashboard</a>
+              <a href="#" class="https://repnexa.com/rep-submission/">Medical Rep View</a>
+              <a href="#" class="https://repnexa.com/repnexa-dashboard-V2/Index">Master List Manager</a>
             </div>
           </div>
         </section>
@@ -1457,16 +1457,22 @@
               <p class="contact-meta">
                 <strong>Typical response time:</strong> within 1–2 business
                 days.<br />
-                You can also reach us at <strong>hello@repnexa.com</strong>.
+                You can also reach us at <strong>dinithpersonale@gmail.com</strong>.
               </p>
             </div>
 
-            <form class="contact-form">
+            <form
+              class="contact-form"
+              action="mailto:dinithpersonale@gmail.com"
+              method="POST"
+              enctype="text/plain"
+            >
               <div class="contact-row-2">
                 <div>
                   <label class="contact-label" for="name">Name</label>
                   <input
                     id="name"
+                    name="name"
                     type="text"
                     class="contact-input"
                     placeholder="Your full name"
@@ -1476,42 +1482,43 @@
                   <label class="contact-label" for="company">Company</label>
                   <input
                     id="company"
+                    name="company"
                     type="text"
                     class="contact-input"
                     placeholder="Company or organization"
                   />
                 </div>
               </div>
-
+            
               <div>
                 <label class="contact-label" for="email">Work Email</label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
                   class="contact-input"
                   placeholder="you@company.com"
                 />
               </div>
-
+            
               <div>
-                <label class="contact-label" for="message"
-                  >How can we help?</label
-                >
+                <label class="contact-label" for="message">How can we help?</label>
                 <textarea
                   id="message"
+                  name="message"
                   class="contact-textarea"
                   placeholder="Tell us a bit about your team, current tools, and what you’d like to improve..."
                 ></textarea>
               </div>
-
+            
               <div class="contact-actions">
-                <button type="button" class="btn-primary">Send message</button>
-                <span class="contact-hint"
-                  >This is a sample form – wire it up to your backend or form
-                  tool.</span
-                >
+                <button type="submit" class="btn-primary">Send message</button>
+                <span class="contact-hint">
+                  This will open your default email client with the typed message.
+                </span>
               </div>
             </form>
+
           </div>
         </section>
       </main>
